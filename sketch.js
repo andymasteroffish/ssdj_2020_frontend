@@ -84,8 +84,8 @@ function setup() {
 
 	masterVolume(0.2)
 
-	socket = new WebSocket("ws://localhost:3000")
-    //socket = new WebSocket("ws://ssdj-game.herokuapp.com:80")
+	//socket = new WebSocket("ws://localhost:3000")
+    socket = new WebSocket("ws://ssdj-game.herokuapp.com:80")
 
     socket.onopen = function (event) {
 		console.log("open for bizzness")
