@@ -13,9 +13,13 @@ const useScript = opts => {
 
     script.src = url;
     script.async = async;
-    script.integrity = integrity;
-    script.crossOrigin = crossOrigin;
     script.type = type;
+    if (integrity) {
+      script.integrity = integrity;
+    }
+    if (crossOrigin) {
+      script.crossOrigin = crossOrigin;
+    }
 
     document.body.appendChild(script);
 

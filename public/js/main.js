@@ -57,6 +57,9 @@ var game_state = STATE_NOT_CONNECTED;
 
 var waiting_message = "Waiting on server";
 
+//hooks
+var player_update_callback
+
 //using the p5js structure here, which has a few functions it will call automaticly
 //preload runs before everything else. All assets should be loaded here
 //https://p5js.org/reference/#/p5/preload
@@ -77,6 +80,11 @@ function setup() {
 
   //set the sound playback volume
   masterVolume(0.2);
+
+  //starting with a no-op
+  register_for_player_data_updates( function(){
+    console.log('replace me with a real funciton')
+  } )
 
   last_frame_millis = millis();
 }
@@ -112,6 +120,12 @@ function keyPressed() {
     console.log("mute: " + mute);
   }
 }
+
+//things for Henry to plug into
+function register_for_player_data_updates(callback){
+  player_update_callback = callback
+}
+
 
 //test commands to be called from console
 function force_start() {
