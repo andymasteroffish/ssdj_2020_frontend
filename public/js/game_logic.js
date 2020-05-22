@@ -107,6 +107,8 @@ function refresh_board(){
 	turn_num = queued_board.turn_num
 	max_turns = queued_board.max_turn_num
 
+	player_update_callback(players)
+
 	update_player_info_div(players)
 
 	queued_board = null
