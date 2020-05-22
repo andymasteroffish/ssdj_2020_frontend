@@ -3,12 +3,19 @@ import { useEffect } from "react";
 const useScript = opts => {
   useEffect(() => {
     const script = document.createElement("script");
-    const { url, async = true, integrity, crossorigin } = opts;
+    const {
+      url,
+      async = false,
+      integrity,
+      crossOrigin,
+      type = "text/javascript"
+    } = opts;
+
     script.src = url;
     script.async = async;
     script.integrity = integrity;
-    script.crossOrigin = crossorigin;
-    script.type = "text/javascript";
+    script.crossOrigin = crossOrigin;
+    script.type = type;
 
     document.body.appendChild(script);
 

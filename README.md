@@ -3,7 +3,7 @@
 Created for Super Social Distance Jam!
 http://ssdj.am/
 
-This is the frontend of the game. 
+This is the frontend of the game.
 The backend repo is here: https://github.com/andymasteroffish/ssdj_2020_backend
 
 This game is made using P5.js
@@ -15,15 +15,15 @@ Every "turn" is broken up into 4 beats. Players input their move on beat 3, then
 
 All players move simultaneously.
 
-The goal is for the server to finish processing and send out the move *before* the 4th beat
+The goal is for the server to finish processing and send out the move _before_ the 4th beat
 
 ## Testing
 
-Use `python -m SimpleHTTP Server` to test locally
+Use `yarn start` to test locally
 
 The backend repo has instructions for how to run that locally as well
 
-You can uncomment a line at the top of  js/communication.js to use the local websocket server
+You can uncomment a line at the top of js/communication.js to use the local websocket server
 
 ## Files
 
@@ -48,7 +48,7 @@ Handles drawing the game to the canvas
 #### main.js
 
 Base file. Not much logic here, just calling out to the other files.
-Pretty much all of the game variables live here 
+Pretty much all of the game variables live here
 
 #### page_manipulation.js
 

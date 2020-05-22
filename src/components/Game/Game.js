@@ -6,39 +6,31 @@ const Game = () => {
   useScript({
     url: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js",
     integrity: "sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=",
-    crossorigin: "anonymous"
+    crossOrigin: "anonymous"
   });
   useScript({
-    url: "libraries/p5.js",
-    async: false
+    url: "libraries/p5.js"
   });
   useScript({
-    url: "libraries/p5.sound.js",
-    async: false
+    url: "libraries/p5.sound.js"
   });
   useScript({
-    url: "js/main.js",
-    async: false
+    url: "js/main.js"
   });
   useScript({
-    url: "js/game_render.js",
-    async: false
+    url: "js/game_render.js"
   });
   useScript({
-    url: "js/game_logic.js",
-    async: false
+    url: "js/game_logic.js"
   });
   useScript({
-    url: "js/page_manipulation.js",
-    async: false
+    url: "js/page_manipulation.js"
   });
   useScript({
-    url: "js/communication.js",
-    async: false
+    url: "js/communication.js"
   });
   useScript({
-    url: "js/audio_player.js",
-    async: false
+    url: "js/audio_player.js"
   });
   return (
     <div className="Game">
