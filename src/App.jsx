@@ -9,7 +9,6 @@ const App = () => {
   const [playerData, updatePlayerData] = useState([]);
   const [name, setName] = useState("");
   const [joined, setJoined] = useState(false);
-  const [rerender, setRerender] = useState(false);
   const [socket, setSocket] = useState();
 
   const gameLoaded =
@@ -22,10 +21,8 @@ const App = () => {
       console.log("REGISTERING GAME DATA PIPE");
       window["register_for_player_data_updates"](updatePlayerData);
       setSocket(window["socket"]);
-    } else {
-      setRerender(!rerender);
     }
-  }, [gameLoaded, rerender, socket]);
+  }, [gameLoaded, socket]);
 
   const addPlayer = name => {
     console.log(`ADD PLAYER: ${name}`);
