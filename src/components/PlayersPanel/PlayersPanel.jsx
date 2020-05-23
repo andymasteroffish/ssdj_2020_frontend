@@ -1,25 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Instructions from "./../Instructions/Instructions.jsx";
 
 import "./PlayersPanel.scss";
 
 const PlayersPanel = props => {
   const { name, setName, gameData, addPlayer, joined } = props;
+  const [tempName, setTempName] = useState("");
 
   const updateName = event => {
-    setName(event.target.value);
+    setTempName(event.target.value);
   };
-  const handlePlayerJoin = event => {
-    addPlayer(name);
+
+  const savePlayerName = () => {
+    setName(tempName);
+    if (gameData.game_state === 0) {
+      addPlayer(tempName);
+    }
   };
+
   const players = gameData.players;
 
   return (
     <div className="PlayersPanel">
-      {!joined && (
+      {!name && (
         <div>
-          <input type="text" value={name} onChange={updateName} />
-          <button onClick={handlePlayerJoin}>Join</button>
+          <input type="text" value={tempName} onChange={updateName} />
+          <button onClick={savePlayerName}>Join</button>
+        </div>
+      )}
+      {name && (
+        <div>
+          <h2>Your name is: {name}</h2>
+        </div>
+      )}
+      {name && !joined && (
+        <div>
+          <h3>Waiting to join game....</h3>
+        </div>
+      )}
+      {gameData.game_state === 0 && name && joined && (
+        <div>
+          <h3>Waiting to others to join....</h3>
         </div>
       )}
       <table className="player-data-table">
@@ -31,22 +52,24 @@ const PlayersPanel = props => {
         </thead>
         <tbody>
           {players[0] &&
-            players.map((data, idx) => (
-              <tr key={idx}>
-                <td className={data.disp_name === name ? "current-player" : ""}>
-                  {data.disp_name}
-                </td>
-                <td>{data.games_played}</td>
-              </tr>
-            ))}
-            {
-              !players[0] && (
-                <tr>
-                  <td>No players yet.</td>
-                  <td></td>
+            players.map((data, idx) => {
+              return (
+                <tr key={idx}>
+                  <td
+                    className={data.disp_name === name ? "current-player" : ""}
+                  >
+                    {data.disp_name}
+                  </td>
+                  <td>{data.games_played}</td>
                 </tr>
-              )
-            }
+              );
+            })}
+          {!players[0] && (
+            <tr>
+              <td>No players yet.</td>
+              <td></td>
+            </tr>
+          )}
         </tbody>
       </table>
 

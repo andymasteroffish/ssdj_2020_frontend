@@ -80,8 +80,21 @@ const mainLoader = async () => {
   });
 };
 
-const gameRenderLoader = async () => {
+const playerAnimLoader = async () => {
   await mainLoader();
+  console.log("LOADING player_anim");
+
+  return new Promise(function(resolve, reject) {
+    loadScript({
+      url: "js/player_anim.js",
+      resolve: resolve,
+      reject: reject
+    });
+  });
+};
+
+const gameRenderLoader = async () => {
+  await playerAnimLoader();
   console.log("LOADING game_render");
 
   return new Promise(function(resolve, reject) {
@@ -132,21 +145,8 @@ const audioPlayerLoader = async () => {
   });
 };
 
-const playerAnimLoader = async () => {
-  await audioPlayerLoader();
-  console.log("LOADING player_anim");
-
-  return new Promise(function(resolve, reject) {
-    loadScript({
-      url: "js/player_anim.js",
-      resolve: resolve,
-      reject: reject
-    });
-  });
-};
-
 async function loadGame() {
-  await playerAnimLoader();
+  await audioPlayerLoader();
 
   console.log("RENDERING GAME");
   ReactDOM.render(

@@ -67,8 +67,6 @@ function process_msg(data) {
     in_game = true;
     my_id = msg.player_info.id;
     my_name = msg.player_info.disp_name;
-
-    send_callback_info(msg.info.players, game_state)
   }
 
   if (msg.type === "board") {
@@ -90,8 +88,11 @@ function process_msg(data) {
   if (msg.type === "game_end") {
     game_state = STATE_WAITING;
     turn_timer = 0;
-    send_callback_info(msg.info.players, game_state)
     //window.client_update_callback(msg.info.players);
+  }
+
+  if (msg.info && msg.info.players) {
+    send_callback_info(msg.info.players, game_state);
   }
 }
 
