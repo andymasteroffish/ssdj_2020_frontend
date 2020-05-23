@@ -2,7 +2,6 @@
   "name": "ssdj_2020_frontend_react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://andymakesgames.com/extras/tests/ssdj_2020/build",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
