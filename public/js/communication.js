@@ -8,7 +8,7 @@ var socket;
 
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-remote_adress = "ws://localhost:3001";
+//remote_adress = "ws://localhost:3001";
 
 function setup_websocket() {
   console.log("opening ");
