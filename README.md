@@ -9,6 +9,11 @@ The backend repo is here: https://github.com/andymasteroffish/ssdj_2020_backend
 This game is made using P5.js
 Reference pages here: https://p5js.org/reference/
 
+use yarn start to test
+
+ass this line to package.json to make build
+  "homepage": "http://andymakesgames.com/extras/tests/ssdj_2020/build",
+
 ## Basic structure
 
 Every "turn" is broken up into 4 beats. Players input their move on beat 3, then the server processes everybody's move and sends it back. The move gets shown on beat 4.

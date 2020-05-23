@@ -6,6 +6,8 @@
 
 var cell_size = 35
 
+var anims = []
+
 //renders the game to the canvas
 //called every frame
 function draw_game(){
@@ -22,6 +24,11 @@ function draw_board(){
 	push()
 	translate(cell_size/2,110)
 
+	for (let i=0; i<anims.length; i++){
+		update_player_anim(anims[i])
+	}
+
+	//i don't think this is used
 	let anim_prc = 1
 	if (turn_timer > anim_start_time && turn_timer < anim_end_time){
 		anim_prc = map(turn_timer, anim_start_time, anim_end_time, 0, 1)
@@ -43,61 +50,13 @@ function draw_board(){
 	}
 
 	//players
-	for (let i=0; i<players.length; i++){
-		let player = players[i]
+	for (let i=0; i<anims.length; i++){
+		let player = anims[i].owner
 
-		let pos_x = anim_prc*player.x + (1.0-anim_prc)*player.prev_x
-		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_y
+		let pos_x = anim_prc*player.x + (1.0-anim_prc)*player.prev_state.x
+		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_state.y
 		
-		draw_player(player, pos_x*cell_size, pos_y*cell_size)
-		/*
-		let alpha = 255
-		if (player.is_dead){
-			alpha = 50
-		}
-		if (player.id == my_id){
-			fill(0,255,0,alpha)
-		}else{
-			fill(255,0,0,alpha)
-		}
-		//let padding = 10
-		let player_w = cell_size - 20
-		rect(pos_x*cell_size-player_w/2, pos_y*cell_size-player_w/2, player_w, player_w)
-	
-		//stunned
-		//console.log("player stunn "+player.is_stunned)
-		if (player.is_stunned){
-			fill(0,0,255,200);
-			ellipse(pos_x*cell_size, pos_y*cell_size, 40)
-		}
-
-		//sword
-		//console.log("input type:"+player.input_type)
-		if (player.input_type == INPUT_SLASH || player.input_type == INPUT_DASH){
-			push()
-			translate(pos_x*cell_size, pos_y*cell_size)
-			rotate(PI/2 * player.input_dir)
-			fill(50)
-			rect(-4,-30,8,30)
-
-			pop()
-		}
-
-		if (player.input_type == INPUT_PARRY){
-			noFill()
-			stroke(50)
-			strokeWeight(2)
-			ellipse(pos_x*cell_size, pos_y*cell_size, 40)
-			strokeWeight(1)
-		}
-		*/
-
-		//arrow showing input
-		// if (player.id == my_id && input_info != null){
-		// 	if (input_info.dir != DIR_NONE){
-		// 		draw_arrow(player.x*cell_size,player.y*cell_size, input_info.dir)
-		// 	}
-		// }
+		draw_player_anim(anims[i], pos_x*cell_size, pos_y*cell_size)
 
 	}
 	pop()
@@ -166,6 +125,17 @@ function draw_timing_ui(){
 	}
 
 	pop()
+}
+
+function refresh_player_animators(players){
+	//clear what's there
+	anims = []
+
+	//make new animators
+	for (let i=0; i<players.length; i++){
+		anims.push( make_animator(players[i]))
+	}
+
 }
 
 //draws an arrow at the given location

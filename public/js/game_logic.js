@@ -17,6 +17,7 @@ var dash_key = 68	//d
 var input_info = null
 
 
+
 //once we get timing info from the server we can setup some values to use locally
 //called once as soon as we connect
 function setup_timing(){
@@ -54,11 +55,9 @@ function update_game(){
 	//zeno the turn timer towards the server time
 	let target_time = server_timer
 	if ( abs(turn_timer-(server_timer+turn_time)) < abs(turn_timer-target_time) ){
-		console.log("pump it up")
 		target_time = server_timer+turn_time
 	}
 	if ( abs(turn_timer-(server_timer-turn_time)) < abs(turn_timer-target_time) ){
-		console.log("smack it down")
 		target_time = server_timer-turn_time
 	}
 	turn_timer = timing_zeno*turn_timer + (1.0-timing_zeno)*target_time
@@ -194,6 +193,8 @@ function refresh_board(){
 	input_info = null
 	input1 = null
 	input2 = null
+
+	refresh_player_animators(players)
 
 	window.client_update_callback(players)
 
