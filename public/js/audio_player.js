@@ -6,7 +6,7 @@
 // https://p5js.org/reference/#/libraries/p5.sound
 //----------------------
 
-var mute = true
+var mute = false
 var beat_sounds = new Array(4)
 
 function load_sounds(){

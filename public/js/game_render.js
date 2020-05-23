@@ -4,7 +4,7 @@
 // I handle drawing the game to the p5 canvas
 //----------------------
 
-var cell_size = 50
+var cell_size = 35
 
 //renders the game to the canvas
 //called every frame
@@ -20,7 +20,7 @@ function draw_game(){
 //will animate things from their previous state depending on time
 function draw_board(){
 	push()
-	translate(cell_size/2,70+cell_size/2)
+	translate(cell_size/2,110)
 
 	let anim_prc = 1
 	if (turn_timer > anim_start_time && turn_timer < anim_end_time){
@@ -39,18 +39,6 @@ function draw_board(){
 				ellipse(c*cell_size, r*cell_size, 5)
 			}
 
-			// let val = anim_prc*board[c][r].val + (1.0-anim_prc)*board[c][r].prev_val
-
-			// if (val > 0){
-			// 	let size = map(val,0,4,0,cell_size*0.5)
-			// 	fill(235, 219, 5)
-			// 	ellipse(c*cell_size+cell_size/2, r*cell_size+cell_size/2, size)
-			// }
-			// else{
-			// 	let size = 5
-			// 	fill(20)
-			// 	ellipse(c*cell_size+cell_size/2, r*cell_size+cell_size/2, size)
-			// }
 		}
 	}
 
@@ -60,8 +48,9 @@ function draw_board(){
 
 		let pos_x = anim_prc*player.x + (1.0-anim_prc)*player.prev_x
 		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_y
-		//console.log(player.x + " vs "+player.prev_x)
-
+		
+		draw_player(player, pos_x*cell_size, pos_y*cell_size)
+		/*
 		let alpha = 255
 		if (player.is_dead){
 			alpha = 50
@@ -101,13 +90,14 @@ function draw_board(){
 			ellipse(pos_x*cell_size, pos_y*cell_size, 40)
 			strokeWeight(1)
 		}
+		*/
 
 		//arrow showing input
-		if (player.id == my_id && input_info != null){
-			if (input_info.dir != DIR_NONE){
-				draw_arrow(player.x*cell_size,player.y*cell_size, input_info.dir)
-			}
-		}
+		// if (player.id == my_id && input_info != null){
+		// 	if (input_info.dir != DIR_NONE){
+		// 		draw_arrow(player.x*cell_size,player.y*cell_size, input_info.dir)
+		// 	}
+		// }
 
 	}
 	pop()
@@ -148,8 +138,15 @@ function draw_timing_ui(){
 		ellipse(i*spacing,0, size, size)
 
 		//drawing the arrow
-		if (i==2 && input_dir > DIR_NONE){
-			draw_arrow(i*spacing,0,input_dir)
+		if (i==2 && input_info != null){
+			if (input_info.action == INPUT_PARRY){
+				stroke(0)
+				noFill()
+				ellipse(i*spacing,0, size*0.6, size*0.6)
+			}
+			if (input_info.dir != DIR_NONE){
+				draw_arrow(i*spacing,0,input_info.dir)
+			}
 		}
 	}
 
@@ -163,7 +160,9 @@ function draw_timing_ui(){
 
 	if (game_state == STATE_PLAYING){
 		fill(0)
-		text("turn "+turn_num+" of "+max_turns, 10, 30)
+		noStroke()
+		textAlign(CENTER);
+		text("turn "+turn_num+" of "+max_turns, width/2, 30)
 	}
 
 	pop()

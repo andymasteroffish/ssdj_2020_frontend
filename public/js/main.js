@@ -30,9 +30,6 @@ var timing_zeno = 0.99; //how quickly the current time will try to match the tim
 var padding_before_display = 400; //millis
 var input_padding = 250;
 
-//testing
-input_padding = 999999
-
 //these get setup once we hear from server in game_logic/setup_timing()
 var input_min_time = -1;
 var input_max_time = -1;
@@ -74,6 +71,7 @@ var player_update_callback
 //https://p5js.org/reference/#/p5/preload
 function preload() {
   load_sounds();
+  load_player_sprites();
 }
 
 //p5 setup function. called once everything loads
@@ -103,9 +101,7 @@ function setup() {
 //things that need to happen repeatedly go here
 //https://p5js.org/reference/#/p5/draw
 function draw() {
-  background(255);
-
-  text(waiting_message, width / 2 - 100, height / 2);
+  background(100);
 
   update_general()
   
@@ -114,6 +110,9 @@ function draw() {
   }
 
   draw_game();
+
+  textAlign(LEFT);
+  text(waiting_message, width / 2 - 100, height / 2);
 }
 
 //p5 key press function. triggers on keypress
