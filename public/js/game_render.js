@@ -53,8 +53,8 @@ function draw_board(){
 	for (let i=0; i<anims.length; i++){
 		let player = anims[i].owner
 
-		let pos_x = anim_prc*player.x + (1.0-anim_prc)*player.prev_x
-		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_y
+		let pos_x = anim_prc*player.x + (1.0-anim_prc)*player.prev_state.x
+		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_state.y
 		
 		draw_player_anim(anims[i], pos_x*cell_size, pos_y*cell_size)
 

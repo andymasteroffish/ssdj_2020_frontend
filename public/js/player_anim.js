@@ -68,9 +68,15 @@ function make_animator(player){
 		anim.state = ANIM_IDLE
 	}
 
+	console.log(player.prev_state)
 	//the dead are always dead
 	if (player.is_dead){
 		anim.state = ANIM_DEATH
+		//if they were dead last turn, just sip to the end
+		if (player.prev_state.is_dead){
+			anim.frame = 9999
+			anim.timer = 9999
+		}
 	}
 
 	return anim
@@ -180,7 +186,6 @@ function draw_player_anim(anim, x, y){
 	}
 	rotate(rotation)
 
-	//let sprite = get_player_sprite(player)
 	image(anim.sprite, -anim.sprite.width/2, -anim.sprite.height/2);
 
 	pop()
