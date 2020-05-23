@@ -6,7 +6,7 @@ import App from "./App";
 const loadScript = opts => {
   const {
     url,
-    async = false,
+    async = true,
     integrity,
     crossOrigin,
     type = "text/javascript",
