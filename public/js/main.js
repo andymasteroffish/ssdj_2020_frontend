@@ -30,6 +30,9 @@ var timing_zeno = 0.99; //how quickly the current time will try to match the tim
 var padding_before_display = 400; //millis
 var input_padding = 250;
 
+//testing
+input_padding = 999999
+
 //these get setup once we hear from server in game_logic/setup_timing()
 var input_min_time = -1;
 var input_max_time = -1;

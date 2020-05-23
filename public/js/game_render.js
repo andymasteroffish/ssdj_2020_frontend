@@ -62,10 +62,14 @@ function draw_board(){
 		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_y
 		//console.log(player.x + " vs "+player.prev_x)
 
+		let alpha = 255
+		if (player.is_dead){
+			alpha = 50
+		}
 		if (player.id == my_id){
-			fill(0,255,0)
+			fill(0,255,0,alpha)
 		}else{
-			fill(255,0,0)
+			fill(255,0,0,alpha)
 		}
 		//let padding = 10
 		let player_w = cell_size - 20
@@ -90,9 +94,19 @@ function draw_board(){
 			pop()
 		}
 
+		if (player.input_type == INPUT_PARRY){
+			noFill()
+			stroke(50)
+			strokeWeight(2)
+			ellipse(pos_x*cell_size, pos_y*cell_size, 40)
+			strokeWeight(1)
+		}
+
 		//arrow showing input
 		if (player.id == my_id && input_info != null){
-			draw_arrow(player.x*cell_size,player.y*cell_size, input_info.dir)
+			if (input_info.dir != DIR_NONE){
+				draw_arrow(player.x*cell_size,player.y*cell_size, input_info.dir)
+			}
 		}
 
 	}
