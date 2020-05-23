@@ -185,10 +185,15 @@ function refresh_board(){
 
 	console.log("refresh now pls")
 
+	game_state = queued_board.game_state
 	board = queued_board.board
 	players = queued_board.players
 	turn_num = queued_board.turn_num
 	max_turns = queued_board.max_turn_num
+
+	//console.log("players:")
+	//console.log(players)
+	//console.log("game state: "+game_state)
 
 	input_info = null
 	input1 = null

@@ -8,7 +8,7 @@ var socket;
 
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-// remote_adress = "ws://localhost:3001";
+remote_adress = "ws://localhost:3001";
 
 socket = new WebSocket(remote_adress);
 //things to happen once socket is connected
@@ -37,6 +37,7 @@ function process_msg(data) {
 
   //if it has game info, we can update
   if (msg.info != null) {
+    console.log("update board")
     get_board(msg.info);
   }
 
@@ -60,6 +61,7 @@ function process_msg(data) {
     cols = msg.cols;
     rows = msg.rows;
     setup_timing();
+    refresh_board();
   }
 
   if (msg.type === "join_confirm") {
