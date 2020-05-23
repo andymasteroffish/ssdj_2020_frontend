@@ -82,9 +82,25 @@ function update_player_anim(anim){
 	if (anim.timer > millis_per_frame){
 		anim.timer -= millis_per_frame
 		anim.frame++
-		//tetsing just having everything loop
+		//when the animation is done we should figure out what we do next
 		if (anim.frame >= sprite_frames.length){
-			anim.frame = 0
+			//idle and stun just loop
+			if (anim.state == ANIM_IDLE || anim.state == ANIM_STUNNED){
+				anim.frame = 0
+			}
+			//death stays on last frame
+			else if (anim.state == ANIM_DEATH){
+				anim.frame = sprite_frames.length-1
+			}
+			//all others move to idle or stunned
+			else{
+				anim.frame = 0
+				if (anim.owner.is_stunned){
+					anim.state = ANIM_STUNNED
+				}else{
+					anim.state = ANIM_IDLE
+				}
+			}
 		}
 	}
 
