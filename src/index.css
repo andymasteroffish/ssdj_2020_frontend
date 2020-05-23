@@ -16,7 +16,28 @@ code {
 }
 
 .main-container {
+  position: absolute;
+  top: 0;
+  right: 0 ;
+  left: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
+}
+
+.game-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 10px solid tomato;
+  border-radius: 10px;
+  height: 500px;
+  width: 1000px;
+}
+
+#canvas_holder {
+  height: 500px;
+  width: 500px;
 }

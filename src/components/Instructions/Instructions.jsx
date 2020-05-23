@@ -8,8 +8,6 @@ const Instructions = () => {
       <br />
       Press M to toggle mute (sound only plays during gameplay)
       <br />
-      Press M to toggle mute (sound only plays during gameplay)
-      <br />
       Input your move on the orange beat. Last player standing wins
       <br />
       <br />

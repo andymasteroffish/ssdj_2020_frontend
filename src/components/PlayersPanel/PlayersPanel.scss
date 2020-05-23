@@ -1,7 +1,29 @@
 $red: #f00;
+$green: #a2dda2;
+$purple: #680871;
 
 .PlayersPanel {
+  background: $green;
+  height: 460px;
+  padding: 20px;
+
   .current-player {
     color: $red;
+  }
+
+  .player-data-table {
+    border-left:  1px solid $purple;
+    border-top:  1px solid $purple;
+    border-bottom:  1px solid $purple;
+    border-spacing: 0;
+
+    th, td {
+      width: 90px;
+      border-right: 1px solid $purple;
+    }
+    th {
+      border-bottom: 3px solid $purple;
+    }
+
   }
 }

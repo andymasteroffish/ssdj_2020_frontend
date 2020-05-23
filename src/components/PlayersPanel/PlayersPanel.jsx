@@ -1,8 +1,10 @@
 import React from "react";
+import Instructions from "./../Instructions/Instructions.jsx";
+
 import "./PlayersPanel.scss";
 
 const PlayersPanel = props => {
-  const { name, setName, playerData, addPlayer, joined } = props;
+  const { name, setName, gameData, addPlayer, joined } = props;
 
   const updateName = event => {
     setName(event.target.value);
@@ -10,6 +12,7 @@ const PlayersPanel = props => {
   const handlePlayerJoin = event => {
     addPlayer(name);
   };
+  const players = gameData.players;
 
   return (
     <div className="PlayersPanel">
@@ -19,7 +22,7 @@ const PlayersPanel = props => {
           <button onClick={handlePlayerJoin}>Join</button>
         </div>
       )}
-      <table>
+      <table className="player-data-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -27,8 +30,8 @@ const PlayersPanel = props => {
           </tr>
         </thead>
         <tbody>
-          {playerData &&
-            playerData.map((data, idx) => (
+          {players[0] &&
+            players.map((data, idx) => (
               <tr key={idx}>
                 <td className={data.disp_name === name ? "current-player" : ""}>
                   {data.disp_name}
@@ -36,8 +39,18 @@ const PlayersPanel = props => {
                 <td>{data.games_played}</td>
               </tr>
             ))}
+            {
+              !players[0] && (
+                <tr>
+                  <td>No players yet.</td>
+                  <td></td>
+                </tr>
+              )
+            }
         </tbody>
       </table>
+
+      <Instructions />
     </div>
   );
 };

@@ -1,7 +1,10 @@
 .App {
   display: flex;
+  height: 500px;
+  width: 500px;
+}
 
-  .instructions {
-    padding-top: 20px;
-  }
+#canvas_holder {
+  height: 500px;
+  width: 500px;
 }
