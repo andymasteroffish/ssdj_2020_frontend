@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Game from "./components/Game/Game.jsx";
+import Instructions from "./components/Instructions/Instructions.jsx";
 import PlayersPanel from "./components/PlayersPanel/PlayersPanel.jsx";
 
 import "./App.scss";
@@ -12,12 +13,13 @@ const App = () => {
   const [socket, setSocket] = useState();
 
   const gameLoaded =
-    typeof window["register_for_player_data_updates"] == "function";
+    typeof window["register_for_player_data_updates"] == "function" && ;
+    typeof window["socket"] == "function" && ;
 
   console.log(`GAME LOADED? ${gameLoaded}`);
 
   useEffect(() => {
-    if (window["register_for_player_data_updates"]) {
+    if (gameLoaded) {
       console.log("REGISTERING GAME DATA PIPE");
       window["register_for_player_data_updates"](updatePlayerData);
       setSocket(window["socket"]);
@@ -45,23 +47,7 @@ const App = () => {
           addPlayer={addPlayer}
           joined={joined}
         />
-
-        <div className="instructions">
-          ---------
-          <br />
-          Press M to toggle mute (sound only plays during gameplay)
-          <br />
-          Input your move on the orange beat. Last player standing wins
-          <br />
-          <br />
-          Move (arrow keys) : move one tile
-          <br />
-          Slash (S + arrow) : attack adjacent tile
-          <br />
-          Dash (D + arrow) : move and attack, but you are stunned for your next turn
-          <br />
-          Parry (S) : parry any incoming attacks, protecting yourself and stunning the attacker. If you parry but are not attacked you will be stunned
-        </div>
+        <Instructions />
       </div>
     </div>
   );
