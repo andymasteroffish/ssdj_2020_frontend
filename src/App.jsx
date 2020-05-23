@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Game from "./components/Game/Game.jsx";
+import Instructions from "./components/Instructions/Instructions.jsx";
 import PlayersPanel from "./components/PlayersPanel/PlayersPanel.jsx";
 
 import "./App.scss";
@@ -12,12 +13,13 @@ const App = () => {
   const [socket, setSocket] = useState();
 
   const gameLoaded =
-    typeof window["register_for_player_data_updates"] == "function";
+    typeof window["register_for_player_data_updates"] == "function" && ;
+    typeof window["socket"] == "function" && ;
 
   console.log(`GAME LOADED? ${gameLoaded}`);
 
   useEffect(() => {
-    if (window["register_for_player_data_updates"]) {
+    if (gameLoaded) {
       console.log("REGISTERING GAME DATA PIPE");
       window["register_for_player_data_updates"](updatePlayerData);
       setSocket(window["socket"]);
@@ -46,17 +48,7 @@ const App = () => {
           joined={joined}
         />
 
-        <div className="instructions">
-          ---------
-          <br />
-          Press M to toggle mute (sound only plays during gameplay)
-          <br />
-          Use arrow keys on orange beat to move.
-          <br />
-          S+arrow = slash
-          <br />
-          D+arrow = dash
-        </div>
+        <Instructions />
       </div>
     </div>
   );
