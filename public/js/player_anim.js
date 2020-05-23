@@ -16,8 +16,16 @@ var ANIM_WALK = 5
 var millis_per_frame = 1000/15
 
 function load_player_sprites(){
+	console.log("LOAD SPRITES")
 
 	player_packs.push(make_player_pack("BaldyBlue"))
+	player_packs.push(make_player_pack("CrypticCyan"))
+	player_packs.push(make_player_pack("GooeyGreen"))
+	player_packs.push(make_player_pack("OrneryOrange"))
+	player_packs.push(make_player_pack("PlacidPink"))
+	player_packs.push(make_player_pack("RadRed"))
+	player_packs.push(make_player_pack("ViciousViolet"))
+	player_packs.push(make_player_pack("YummyYellow"))
 
 }
 
@@ -38,7 +46,7 @@ function make_player_pack(id_name){
 function load_sprite_array(id_name, anim_name, num_frames){
 	let anim = []
 	for (let i=0; i<num_frames; i++){
-		anim.push( loadImage('img/'+id_name+"/bb_"+anim_name+"_"+i.toString()+".png") )
+		anim.push( loadImage('img/'+id_name+"/"+anim_name+"_"+i.toString()+".png") )
 	}
 	return anim
 }
@@ -47,7 +55,7 @@ function make_animator(player){
 	//defaults
 	let anim = {
 		owner:player,
-		pack:player_packs[0],
+		pack:player_packs[player.sprite_pack],
 		timer:0,
 		frame:0,
 		state:ANIM_IDLE,
@@ -68,7 +76,6 @@ function make_animator(player){
 		anim.state = ANIM_IDLE
 	}
 
-	console.log(player.prev_state)
 	//the dead are always dead
 	if (player.is_dead){
 		anim.state = ANIM_DEATH
@@ -83,6 +90,16 @@ function make_animator(player){
 }
 
 function update_player_anim(anim){
+	//console.log("how is this "+anim.pack)
+	if (anim.pack == null){
+		console.log("bail on anim. we'll try again next frame")
+
+		//it may be that the packs didn't load yet, so try again
+		anim.pack = player_packs[anim.owner.sprite_pack]
+
+		return
+	}
+
 	let sprite_frames = get_sprite_frames(anim.pack, anim.state)
 	anim.timer += delta_millis
 	if (anim.timer > millis_per_frame){
@@ -136,47 +153,13 @@ function get_sprite_frames(pack, state){
 	return null
 }
 
-/*
-function get_player_sprite(player){
-	let pack = player_packs[0]
-
-	//console.log("test size "+player_packs[0].death[0].width)
-	let sprite = pack.idle[0]
-
-	//this should be replaced by just letting the animation play and then going to idle or whatever
-	let in_animation_window = (turn_timer > anim_start_time && turn_timer < anim_end_time)
-
-	if (in_animation_window){
-		if (player.input_type == INPUT_SLASH || player.input_type == INPUT_DASH){
-			sprite = pack.slash[5]
-		}
-		if (player.input_type == INPUT_PARRY){
-			sprite = pack.parry[3]
-		}
-		if (player.input_type == INPUT_MOVE){
-			sprite = pack.walk[1]
-		}
-	}
-	else{
-		sprite = pack.idle[1]
-		if (player.is_stunned){
-			sprite = pack.stunned[4]
-			if ( millis()%600 < 300 ){
-				sprite = sprite_blank
-			}
-		}
-	}
-
-	//the dead are always dead
-	if (player.is_dead){
-		sprite = pack.death[8]
-	}
-
-	return sprite
-}
-*/
-
 function draw_player_anim(anim, x, y){
+	if (anim.sprite == null){
+		//console.log("bail on null sprite")
+		fill(255,0,0)
+		ellipse(x,y,10)
+		return
+	}
 	push()
 	translate(x,y)
 
