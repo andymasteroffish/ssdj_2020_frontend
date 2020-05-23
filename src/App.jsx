@@ -46,7 +46,6 @@ const App = () => {
           addPlayer={addPlayer}
           joined={joined}
         />
-
         <Instructions />
       </div>
     </div>

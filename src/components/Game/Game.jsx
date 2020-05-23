@@ -33,6 +33,9 @@ const Game = () => {
   useScript({
     url: "js/audio_player.js"
   });
+  useScript({
+    url: "js/player_anim.js"
+  });
   return (
     <div className="Game">
       <div id="top_holder"></div>
