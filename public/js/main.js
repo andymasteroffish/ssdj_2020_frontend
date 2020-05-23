@@ -144,3 +144,13 @@ function force_start() {
 function force_end() {
   socket.send(JSON.stringify({ type: "force_end" }));
 }
+//this will make the game hang on the input beat until I manually send the signal to resolve
+function start_slow_test(){
+  socket.send(JSON.stringify({ type: "force_slow_test" }));
+  socket.send(JSON.stringify({ type: "force_start" }));
+  input_padding = 9999999
+  setup_timing()
+}
+function resolve(){
+  socket.send(JSON.stringify({ type: "resolve" }));
+}
