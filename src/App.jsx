@@ -20,7 +20,7 @@ const App = () => {
     const val = {
       type: "join_request",
       disp_name: name,
-      uuid: uuid.v4
+      uuid: uuid()
     };
     setJoined(true);
     window.socket.send(JSON.stringify(val));

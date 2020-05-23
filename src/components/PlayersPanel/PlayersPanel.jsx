@@ -14,6 +14,7 @@ const PlayersPanel = props => {
   const savePlayerName = () => {
     setName(tempName);
     if (gameData.game_state === 0) {
+      console.log("JOINING WAITING SERVER ON NAME ADD");
       addPlayer(tempName);
     }
   };
@@ -33,14 +34,14 @@ const PlayersPanel = props => {
           <h2>Your name is: {name}</h2>
         </div>
       )}
-      {name && !joined && (
+      {gameData.game_state !== 0 && name && !joined && (
         <div>
-          <h3>Waiting to join game....</h3>
+          <h3>Waiting to join when new game starts....</h3>
         </div>
       )}
       {gameData.game_state === 0 && name && joined && (
         <div>
-          <h3>Waiting to others to join....</h3>
+          <h3>Waiting to start game when others join....</h3>
         </div>
       )}
       <table className="player-data-table">
