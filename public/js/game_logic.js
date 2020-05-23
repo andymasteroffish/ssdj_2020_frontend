@@ -194,6 +194,8 @@ function refresh_board(){
 	input1 = null
 	input2 = null
 
+	refresh_player_animators(players)
+
 	player_update_callback(players)
 
 	update_player_info_div(players)
