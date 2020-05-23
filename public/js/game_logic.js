@@ -50,7 +50,7 @@ function update_game(){
 		console.log(input_info)
 		send_user_input(input_info)
 	}
-	
+
 	//zeno the turn timer towards the server time
 	let target_time = server_timer
 	if ( abs(turn_timer-(server_timer+turn_time)) < abs(turn_timer-target_time) ){
@@ -85,7 +85,7 @@ function update_game(){
 		cur_phase = 3
 		play_beat(cur_phase)
 	}
-	
+
 
 	if (cur_phase == 3 && queued_board != null){
 		refresh_board()
@@ -103,7 +103,7 @@ function update_game(){
 //called when a key is pressed
 function game_keypress(keyCode){
 	//console.log("papa press "+keyCode)
-	
+
 
 	if (game_state == STATE_PLAYING && in_game){
 		if (input_info == null && turn_timer >= input_min_time && turn_timer <= input_max_time){
@@ -133,7 +133,7 @@ function game_keypress(keyCode){
 			// if (keyCode == 38)	input_dir = DIR_UP
 			// if (keyCode == 39)	input_dir = DIR_RIGHT
 			// if (keyCode == 40)	input_dir = DIR_DOWN
-			
+
 			// let val = {
 	  //   		type:"client_move",
 	  //   		key:keyCode
@@ -156,7 +156,7 @@ function make_user_input(key1, key2){
 	}
 	if (key1 == dash_key || key2 == dash_key && dir != DIR_NONE){
 		action = INPUT_DASH
-	}	
+	}
 	if ( key1 == slash_key || key2 == slash_key){
 		if (dir != DIR_NONE){
 			action = INPUT_SLASH
@@ -167,7 +167,7 @@ function make_user_input(key1, key2){
 
 	if (action == INPUT_NONE){
 		console.log('uh oh bad input')
-	}	
+	}
 
 	return{
 		dir:dir,
@@ -195,9 +195,7 @@ function refresh_board(){
 	input1 = null
 	input2 = null
 
-	player_update_callback(players)
-
-	update_player_info_div(players)
+	window.client_update_callback(players)
 
 	queued_board = null
 }
