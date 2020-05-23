@@ -8,7 +8,7 @@ var socket;
 
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-// var remote_adress = "ws://localhost:3001";
+//var remote_adress = "ws://localhost:3001";
 
 function setup_websocket() {
   console.log("opening ");
@@ -84,6 +84,7 @@ function process_msg(data) {
       game_state = STATE_PLAYING;
       set_top_div_on_game_start();
     }
+    console.log("pulse phase:"+msg.phase)
     let prc = msg.phase * 0.25;
     server_timer = turn_time * prc - padding_before_display;
     if (server_timer < 0) {
@@ -115,4 +116,13 @@ function get_board(info) {
   server_timer = turn_time * 0.75 - padding_before_display;
   cur_phase = 2;
   //console.log("now phase:"+cur_phase+" time:" +turn_timer)
+}
+
+function send_user_input(input_info){
+  let val = {
+      type:"client_move",
+      action:input_info.action,
+      dir:input_info.dir
+    }
+    socket.send(JSON.stringify(val));
 }

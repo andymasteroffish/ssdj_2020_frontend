@@ -51,7 +51,11 @@ const App = () => {
           <br />
           Press M to toggle mute (sound only plays during gameplay)
           <br />
-          Use arrow keys on orange beat to move
+          Use arrow keys on orange beat to move.
+          <br />
+          S+arrow = slash
+          <br />
+          D+arrow = dash
         </div>
       </div>
     </div>
