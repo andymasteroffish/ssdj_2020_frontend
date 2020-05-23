@@ -20,7 +20,7 @@ function draw_game(){
 //will animate things from their previous state depending on time
 function draw_board(){
 	push()
-	translate(0,70)
+	translate(cell_size/2,70+cell_size/2)
 
 	let anim_prc = 1
 	if (turn_timer > anim_start_time && turn_timer < anim_end_time){
@@ -31,18 +31,26 @@ function draw_board(){
 	for (let c=0; c<cols; c++){
 		for (let r=0; r<rows; r++){
 
-			let val = anim_prc*board[c][r].val + (1.0-anim_prc)*board[c][r].prev_val
-
-			if (val > 0){
-				let size = map(val,0,4,0,cell_size*0.5)
-				fill(235, 219, 5)
-				ellipse(c*cell_size+cell_size/2, r*cell_size+cell_size/2, size)
-			}
-			else{
-				let size = 5
+			if (board[c][r].passable == false){
+				fill(117, 49, 0)
+				rect(c*cell_size-cell_size/2, r*cell_size-cell_size/2, cell_size*0.85, cell_size*0.85)
+			}else{
 				fill(20)
-				ellipse(c*cell_size+cell_size/2, r*cell_size+cell_size/2, size)
+				ellipse(c*cell_size, r*cell_size, 5)
 			}
+
+			// let val = anim_prc*board[c][r].val + (1.0-anim_prc)*board[c][r].prev_val
+
+			// if (val > 0){
+			// 	let size = map(val,0,4,0,cell_size*0.5)
+			// 	fill(235, 219, 5)
+			// 	ellipse(c*cell_size+cell_size/2, r*cell_size+cell_size/2, size)
+			// }
+			// else{
+			// 	let size = 5
+			// 	fill(20)
+			// 	ellipse(c*cell_size+cell_size/2, r*cell_size+cell_size/2, size)
+			// }
 		}
 	}
 
@@ -59,23 +67,47 @@ function draw_board(){
 		}else{
 			fill(255,0,0)
 		}
-		let padding = 10
-		rect(pos_x*cell_size+padding, pos_y*cell_size+padding, cell_size-padding*2, cell_size-padding*2)
+		//let padding = 10
+		let player_w = cell_size - 20
+		rect(pos_x*cell_size-player_w/2, pos_y*cell_size-player_w/2, player_w, player_w)
 	
-		if (player.id == my_id && input_dir > DIR_NONE){
-			draw_arrow(player.x*cell_size+cell_size/2,player.y*cell_size+cell_size/2, input_dir)
+		//stunned
+		//console.log("player stunn "+player.is_stunned)
+		if (player.is_stunned){
+			fill(0,0,255,200);
+			ellipse(pos_x*cell_size, pos_y*cell_size, 40)
 		}
+
+		//sword
+		//console.log("input type:"+player.input_type)
+		if (player.input_type == INPUT_SLASH || player.input_type == INPUT_DASH){
+			push()
+			translate(pos_x*cell_size, pos_y*cell_size)
+			rotate(PI/2 * player.input_dir)
+			fill(50)
+			rect(-4,-30,8,30)
+
+			pop()
+		}
+
+		//arrow showing input
+		if (player.id == my_id && input_info != null){
+			draw_arrow(player.x*cell_size,player.y*cell_size, input_info.dir)
+		}
+
 	}
 	pop()
 }
 
 //UI elements at the top of the canvas
 function draw_timing_ui(){
-	push()
-	translate(75,40)
 	let spacing = 50
 	let total_width = spacing*4
 	let time_prc = turn_timer/turn_time
+
+	push()
+	translate(width/2-(spacing*3)/2-cell_size/2,40)
+	
 
 	let base_size = 20
 	let big_size = 40
@@ -112,7 +144,7 @@ function draw_timing_ui(){
 		stroke(0)
 		line(0,0,total_width*time_prc,0)
 		stroke(200,50,50)
-		line(0,30,total_width*(server_timer/turn_time),30)
+		line(0,10,total_width*(server_timer/turn_time),10)
 	}
 
 	if (game_state == STATE_PLAYING){

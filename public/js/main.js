@@ -47,7 +47,13 @@ const DIR_UP = 0;
 const DIR_RIGHT = 1;
 const DIR_DOWN = 2;
 const DIR_LEFT = 3;
-var input_dir;
+var input_dir;      //kill me
+
+var INPUT_NONE = 0
+var INPUT_MOVE = 1
+var INPUT_SLASH = 2
+var INPUT_DASH = 3
+var INPUT_PARRY = 4
 
 //waiting to hear from server
 const STATE_NOT_CONNECTED = -1;
@@ -75,7 +81,7 @@ function setup() {
   setup_websocket();
 
   //creates the canvas where the p5 sketch will render
-  var canv = createCanvas(350, 350);
+  var canv = createCanvas(500, 500);
   canv.parent("canvas_holder"); //put the canvas in the right div, otherwise if just adds a new element to the DOM
 
   //set the sound playback volume
@@ -98,6 +104,8 @@ function draw() {
 
   text(waiting_message, width / 2 - 100, height / 2);
 
+  update_general()
+  
   if (game_state === STATE_PLAYING) {
     update_game();
   }
