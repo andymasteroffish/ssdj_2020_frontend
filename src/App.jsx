@@ -13,8 +13,7 @@ const App = () => {
   const [socket, setSocket] = useState();
 
   const gameLoaded =
-    typeof window["register_for_player_data_updates"] == "function" && ;
-    typeof window["socket"] == "function" && ;
+    !!window["register_for_player_data_updates"] && !!window["socket"];
 
   console.log(`GAME LOADED? ${gameLoaded}`);
 
