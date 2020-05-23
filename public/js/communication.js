@@ -8,7 +8,8 @@ var socket;
 
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-//remote_adress = "ws://localhost:3001";
+remote_adress = "ws://localhost:3001";
+
 socket = new WebSocket(remote_adress);
 //things to happen once socket is connected
 socket.onopen = function(event) {
@@ -66,7 +67,8 @@ function process_msg(data) {
     in_game = true;
     my_id = msg.player_info.id;
     my_name = msg.player_info.disp_name;
-    window.client_update_callback(msg.info.players)
+
+    send_callback_info(msg.info.players, game_state)
   }
 
   if (msg.type === "board") {
@@ -88,7 +90,8 @@ function process_msg(data) {
   if (msg.type === "game_end") {
     game_state = STATE_WAITING;
     turn_timer = 0;
-    window.client_update_callback(msg.info.players);
+    send_callback_info(msg.info.players, game_state)
+    //window.client_update_callback(msg.info.players);
   }
 }
 

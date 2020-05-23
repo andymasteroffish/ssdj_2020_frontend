@@ -196,7 +196,16 @@ function refresh_board(){
 
 	refresh_player_animators(players)
 
-	window.client_update_callback(players)
+	send_callback_info(players, game_state)
+	//window.client_update_callback(players)
 
 	queued_board = null
+}
+
+function send_callback_info(_players, _game_state){
+	let info = {
+		players:players,
+		game_state:game_state
+	}
+	window.client_update_callback(info)
 }
