@@ -9,22 +9,16 @@ var socket;
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
 //remote_adress = "ws://localhost:3001";
+socket = new WebSocket(remote_adress);
+//things to happen once socket is connected
+socket.onopen = function(event) {
+  console.log("SOCKET OPEN");
+};
 
-function setup_websocket() {
-  console.log("opening ");
-  socket = new WebSocket(remote_adress);
-
-  //things to happen once socket is connected
-  socket.onopen = function(event) {
-    console.log("open for bizzness");
-    add_join_ui();
-  };
-
-  //getting incoming messages
-  socket.onmessage = function(event) {
-    process_msg(event.data);
-  };
-}
+window.socket = socket;
+window.socket.onmessage = function(event) {
+  process_msg(event.data);
+};
 
 //deal with messages when they come in
 function process_msg(data) {
@@ -72,7 +66,7 @@ function process_msg(data) {
     in_game = true;
     my_id = msg.player_info.id;
     my_name = msg.player_info.disp_name;
-    set_player_joined_ui();
+    window.client_update_callback(msg.info.players)
   }
 
   if (msg.type === "board") {
@@ -82,9 +76,8 @@ function process_msg(data) {
   if (msg.type === "pulse") {
     if (game_state != STATE_PLAYING) {
       game_state = STATE_PLAYING;
-      set_top_div_on_game_start();
     }
-    console.log("pulse phase:"+msg.phase)
+    console.log("pulse phase:" + msg.phase);
     let prc = msg.phase * 0.25;
     server_timer = turn_time * prc - padding_before_display;
     if (server_timer < 0) {
@@ -95,8 +88,7 @@ function process_msg(data) {
   if (msg.type === "game_end") {
     game_state = STATE_WAITING;
     turn_timer = 0;
-    add_join_ui();
-    update_player_info_div(msg.info.players);
+    window.client_update_callback(msg.info.players);
   }
 }
 
@@ -118,11 +110,11 @@ function get_board(info) {
   //console.log("now phase:"+cur_phase+" time:" +turn_timer)
 }
 
-function send_user_input(input_info){
+function send_user_input(input_info) {
   let val = {
-      type:"client_move",
-      action:input_info.action,
-      dir:input_info.dir
-    }
-    socket.send(JSON.stringify(val));
+    type: "client_move",
+    action: input_info.action,
+    dir: input_info.dir
+  };
+  socket.send(JSON.stringify(val));
 }

@@ -47,13 +47,13 @@ const DIR_UP = 0;
 const DIR_RIGHT = 1;
 const DIR_DOWN = 2;
 const DIR_LEFT = 3;
-var input_dir;      //kill me
+var input_dir; //kill me
 
-var INPUT_NONE = 0
-var INPUT_MOVE = 1
-var INPUT_SLASH = 2
-var INPUT_DASH = 3
-var INPUT_PARRY = 4
+var INPUT_NONE = 0;
+var INPUT_MOVE = 1;
+var INPUT_SLASH = 2;
+var INPUT_DASH = 3;
+var INPUT_PARRY = 4;
 
 //waiting to hear from server
 const STATE_NOT_CONNECTED = -1;
@@ -64,7 +64,11 @@ var game_state = STATE_NOT_CONNECTED;
 var waiting_message = "Waiting on server";
 
 //hooks
-var player_update_callback
+window.client_update_callback = function () {};
+
+window.register_client_update_callback = function(callback) {
+  window.client_update_callback = callback;
+};
 
 //using the p5js structure here, which has a few functions it will call automaticly
 //preload runs before everything else. All assets should be loaded here
@@ -78,20 +82,12 @@ function preload() {
 //all logic setup should go here
 //https://p5js.org/reference/#/p5/setup
 function setup() {
-  //connect to server
-  setup_websocket();
-
   //creates the canvas where the p5 sketch will render
   var canv = createCanvas(500, 500);
   canv.parent("canvas_holder"); //put the canvas in the right div, otherwise if just adds a new element to the DOM
 
   //set the sound playback volume
   masterVolume(0.2);
-
-  //starting with a no-op
-  register_for_player_data_updates( function(){
-    console.log('replace me with a real funciton')
-  } )
 
   last_frame_millis = millis();
 }
@@ -103,8 +99,8 @@ function setup() {
 function draw() {
   background(100);
 
-  update_general()
-  
+  update_general();
+
   if (game_state === STATE_PLAYING) {
     update_game();
   }
@@ -130,12 +126,6 @@ function keyPressed() {
     console.log("mute: " + mute);
   }
 }
-
-//things for Henry to plug into
-function register_for_player_data_updates(callback){
-  player_update_callback = callback
-}
-
 
 //test commands to be called from console
 function force_start() {
