@@ -37,16 +37,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <GameComponent />
       <div>
-        <PlayersPanel
-          playerData={playerData}
-          name={name}
-          setName={setName}
-          addPlayer={addPlayer}
-          joined={joined}
-        />
-        <Instructions />
+        <GameComponent />
+        <div>
+          <PlayersPanel
+            playerData={playerData}
+            name={name}
+            setName={setName}
+            addPlayer={addPlayer}
+            joined={joined}
+          />
+          <Instructions />
+        </div>
       </div>
     </div>
   );
