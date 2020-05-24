@@ -62,7 +62,7 @@ const App = () => {
       console.log("JOINING IN RESPONSE TO STATE CHANGE");
       addPlayer(name);
     }
-  }, [gameState, playerOnServer, myUuid, name, joining, joined]);
+  }, [gameState, playerOnServer, myUuid, name, joining, joined, addPlayer]);
 
   useEffect(() => {
     if (joined && !joining && !playerOnServer) {
