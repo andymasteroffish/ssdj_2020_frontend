@@ -90,6 +90,7 @@ function process_msg(data) {
   if (msg.type === "game_end") {
     game_state = STATE_WAITING;
     turn_timer = 0;
+    game_over_timer = game_over_display_time
     //window.client_update_callback(msg.info.players);
   }
 
@@ -108,6 +109,8 @@ function process_msg(data) {
 function get_board(info) {
   queued_board = info;
   waiting_for_board = false;
+
+  prev_winner = info.winner_last_round
 
   //if this is the first ping, do some stuff
   if (board == null) {
