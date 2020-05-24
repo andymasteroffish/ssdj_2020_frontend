@@ -15,7 +15,7 @@ const Status = props => {
     }
   };
   const champName = (currentChamp) => {
-    if (currentChamp.uuid = myUuid) {
+    if (currentChamp.uuid === myUuid) {
       return "You are"
     } else {
       return `${currentChamp.disp_name} is`
