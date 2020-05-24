@@ -2,6 +2,8 @@
 @import "../../css/sizes";
 
 .Players {
+  display: flex;
+  flex-direction: column;
   height: auto;
 
   li {
@@ -20,7 +22,7 @@
   }
 
   .name-display {
-    min-height: 89px;
+    min-height: 107px;
 
     p,
     input {
@@ -28,8 +30,9 @@
       padding: $spacing-xsmall;
     }
 
-    input {
-      background-color: $text-display-background;
+    input,
+    p:last-child {
+      background-color: $text-display-background-disabled;
     }
   }
 
