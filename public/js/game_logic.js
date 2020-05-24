@@ -194,8 +194,9 @@ function refresh_board(){
 
 function send_callback_info(_players, _game_state){
 	let info = {
-		players:players,
-		game_state:game_state
+		players:_players,
+		game_state:_game_state,
+		waiting_message:waiting_message
 	}
 	window.client_update_callback(info)
 }
