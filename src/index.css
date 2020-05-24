@@ -53,7 +53,7 @@ code {
   bottom: 0;
   display: flex;
   justify-content: center;
-  background-image: url("img/background.svg");
+  background-image: url("img/background.png");
   background-position: center bottom;
   background-repeat: repeat-x;
   background-color: #abfafc;
