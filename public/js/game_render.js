@@ -105,8 +105,8 @@ function draw_game(){
 			}
 
 			fill(col)
-			stroke(0)
-			strokeWeight(3)
+			// stroke(0)
+			// strokeWeight(3)
 			textAlign(CENTER, CENTER)
 			textSize(50)
 			text(message, width/2, height/2)
