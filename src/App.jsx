@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Players from "./components/Players/Players.jsx";
 import Instructions from "./components/Instructions/Instructions.jsx";
 import Status from "./components/Status/Status.jsx";
@@ -30,22 +30,25 @@ const App = () => {
 
   const serverMsg = gameData.waiting_message;
 
-  const addPlayer = name => {
-    const id = myUuid || uuid();
-    if (!myUuid) {
-      setMyUuid(id);
-    }
-    console.log(`ADD PLAYER: ${name}`);
-    const val = {
-      type: "join_request",
-      disp_name: name,
-      uuid: id
-    };
+  const addPlayer = useCallback(
+    name => {
+      const id = myUuid || uuid();
+      if (!myUuid) {
+        setMyUuid(id);
+      }
+      console.log(`ADD PLAYER: ${name}`);
+      const val = {
+        type: "join_request",
+        disp_name: name,
+        uuid: id
+      };
 
-    setJoined(true);
-    setJoining(true);
-    window.socket.send(JSON.stringify(val));
-  };
+      setJoined(true);
+      setJoining(true);
+      window.socket.send(JSON.stringify(val));
+    },
+    [myUuid]
+  );
 
   const gameLoaded =
     !!window["register_client_update_callback"] && !!window["socket"];
@@ -102,9 +105,8 @@ const App = () => {
       </div>
       <footer>
         <About />
-
       </footer>
-      <div className='backdrop'></div>
+      <div className="backdrop"></div>
     </div>
   );
 };

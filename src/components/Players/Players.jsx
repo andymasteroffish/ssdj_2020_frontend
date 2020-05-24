@@ -10,7 +10,7 @@ const Players = props => {
   const [tempName, setTempName] = useState("");
 
   const updateName = event => {
-    const cappedName = event.target.value.slice(0,10)
+    const cappedName = event.target.value.slice(0, 10);
     setTempName(cappedName);
   };
 

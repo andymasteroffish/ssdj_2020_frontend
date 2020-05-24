@@ -14,13 +14,13 @@ const Status = props => {
       return <p>Game in progress.</p>;
     }
   };
-  const champName = (currentChamp) => {
+  const champName = currentChamp => {
     if (currentChamp.uuid === myUuid) {
-      return "You are"
+      return "You are";
     } else {
-      return `${currentChamp.disp_name} is`
+      return `${currentChamp.disp_name} `;
     }
-  }
+  };
   return (
     <div className="Status panel">
       <h4>STATUS</h4>
