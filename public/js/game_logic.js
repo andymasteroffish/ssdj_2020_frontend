@@ -170,7 +170,7 @@ function refresh_board(){
 		return
 	}
 
-	console.log("refresh now pls")
+	//console.log("refresh now pls")
 
 	game_state = queued_board.game_state
 	board = queued_board.board
