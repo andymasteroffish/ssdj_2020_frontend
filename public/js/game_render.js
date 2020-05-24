@@ -17,6 +17,8 @@ var grass_sprite = null
 var rock_sprite = null
 var tress_sprite = null
 
+var lava_warning_turns = 4
+
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
 	mute_icons.push(loadImage("img/ui/mute_on.png"))
@@ -83,6 +85,30 @@ function draw_board(){
 					}
 				}
 			}
+
+			//lava
+			if (board[c][r].lava_timer <= lava_warning_turns){
+				let lava_prc = (lava_warning_turns-board[c][r].lava_timer) / lava_warning_turns
+				if (lava_prc > 1)	lava_prc = 1
+
+				let alpha_max = 255 * lava_prc
+				let alpha_prc = 0.5+sin( (millis()/1000)*5 )*0.5
+				let alpha = alpha_max * alpha_prc
+
+				if (board[c][r].lava_timer <= 0){
+					alpha = 255
+				}
+
+				//console.log("lava prc"+lava_prc)
+
+				fill(255,0,0, alpha)
+				noStroke()
+				let lava_test_size = cell_size*0.8
+				rect(c*cell_size-lava_test_size/2, r*cell_size-lava_test_size/2, lava_test_size, lava_test_size)
+
+			}
+			// fill(255,0,0)
+			// text(board[c][r].lava_timer.toString(), c*cell_size, r*cell_size)
 		}
 
 		//top row of grass
