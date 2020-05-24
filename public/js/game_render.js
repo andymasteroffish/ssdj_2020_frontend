@@ -28,6 +28,11 @@ var lava_sprites = []
 var lava_warning_turns = 3
 var lava_fps = 7
 
+//showing winner on game over
+var game_over_display_time = 10000
+var game_over_timer = 0
+var prev_winner = null
+
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
 	mute_icons.push(loadImage("img/ui/mute_on.png"))
@@ -78,6 +83,34 @@ function draw_game(){
 	if (board != null){
 		draw_board()
 		draw_timing_ui()
+	}
+
+	//did we just end
+	if (game_state == STATE_WAITING){
+		game_over_timer -= delta_millis
+		if (game_over_timer > 0){
+			let message = "NO WINNER"
+			let col = 255
+			if (prev_winner != null){
+				message = "WINNER:\n"+prev_winner.disp_name
+
+				if (prev_winner.sprite_pack == 'BaldyBlue')	col = "#00297D"
+				if (prev_winner.sprite_pack == 'CrypticCyan')	col = "##009F8C"
+				if (prev_winner.sprite_pack == 'GooeyGreen')	col = "##0E4300"
+				if (prev_winner.sprite_pack == 'OrneryOrange')	col = "##FF4200"
+				if (prev_winner.sprite_pack == 'PlacidPink')	col = "#FF008E"
+				if (prev_winner.sprite_pack == 'RadRed')	col = "#6E0019"
+				if (prev_winner.sprite_pack == 'ViciousViolet')	col = "#6200AE"
+				if (prev_winner.sprite_pack == 'YummyYellow')	col = "#9C8400"
+			}
+
+			fill(col)
+			stroke(0)
+			strokeWeight(3)
+			textAlign(CENTER, CENTER)
+			textSize(50)
+			text(message, width/2, height/2)
+		}
 	}
 
 	//draw if we're muted

@@ -135,6 +135,7 @@ function update_player_anim(anim){
 				anim.frame = 0
 				anim.state = ANIM_DEATH
 				anim.owner.prev_state.is_dead = true
+				play_death_sound()
 			}
 			//idle and stun just loop
 			else if (anim.state == ANIM_IDLE || anim.state == ANIM_STUNNED){
