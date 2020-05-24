@@ -7,7 +7,10 @@ const Instructions = () => {
       <h4>GAME RULES</h4>
       <p>Last player standing win!</p>
       <p>
-        Each turn, when the light flashes YELLOW, each player may input one of the following moves:
+        <strong>
+          Each turn, when the light flashes YELLOW, each player may input one of
+          the following moves:
+        </strong>
       </p>
       <h5>CONTROLS</h5>
       <p>
