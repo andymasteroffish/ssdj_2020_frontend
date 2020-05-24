@@ -90,6 +90,13 @@ function setup() {
   masterVolume(0.2);
 
   last_frame_millis = millis();
+
+  window.addEventListener("keydown", function(e) {
+      // space and arrow keys
+      if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
+      }
+  }, false);
 }
 
 //p5 draw function. called every frame
@@ -116,8 +123,8 @@ function draw() {
   text(waiting_message, width/2, 110);
   */
 
-  fill(255,0,0)
-  text("fps:"+frameRate(),10,50)
+  // fill(255,0,0)
+  // text("fps:"+frameRate(),10,50)
 }
 
 //p5 key press function. triggers on keypress

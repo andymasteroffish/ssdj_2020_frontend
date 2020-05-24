@@ -104,11 +104,8 @@ function game_keypress(keyCode){
 
 	if (game_state == STATE_PLAYING && in_game){
 		if (input_info == null && turn_timer >= input_min_time && turn_timer <= input_max_time){
-			console.log("anyhting pls")
 			if (input1 == null){
 				//TODO: make sure the input keys are valid
-
-				console.log("got input 1")
 				input1 = keyCode
 				input_send_time = millis() + input_time_window
 				return

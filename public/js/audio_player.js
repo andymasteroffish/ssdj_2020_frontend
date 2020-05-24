@@ -13,7 +13,7 @@ function load_sounds(){
 	beat_sounds[0] = loadSound("sounds/click2.wav")
 	beat_sounds[1] = loadSound("sounds/click2.wav")
 	beat_sounds[2] = loadSound("sounds/wood.wav")
-	beat_sounds[3] = loadSound("sounds/ding.wav")
+	beat_sounds[3] = loadSound("sounds/Soft_1_shorter.wav")
 }
 
 function play_beat(phase){
