@@ -84,7 +84,7 @@ function preload() {
 //https://p5js.org/reference/#/p5/setup
 function setup() {
   //creates the canvas where the p5 sketch will render
-  var canv = createCanvas(500, 500);
+  var canv = createCanvas(315, 500);
   canv.parent("canvas_holder"); //put the canvas in the right div, otherwise if just adds a new element to the DOM
 
   //set the sound playback volume
