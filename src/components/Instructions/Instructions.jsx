@@ -3,21 +3,29 @@ import "./Instructions.scss";
 
 const Instructions = () => {
   return (
-    <div className="instructions">
-      ---------
-      <br />
-      Press M to toggle mute (sound only plays during gameplay)
-      <br />
-      Input your move on the orange beat. Last player standing wins
-      <br />
-      <br />
-      Move (arrow keys) : move one tile
-      <br />
-      Slash (S + arrow) : attack adjacent tile
-      <br />
-      Dash (D + arrow) : move and attack, but you are stunned for your next turn
-      <br />
-      Parry (S) : parry any incoming attacks, protecting yourself and stunning the attacker. If you parry but are not attacked you will be stunned
+    <div className="Instructions panel">
+      <h4>GAME RULES</h4>
+      <p>Last player standing win!</p>
+      <p>
+        Each turn, each player may input one of the following moves when the
+        light flashes YELLOW.
+      </p>
+      <h5>MOVES/CONTROLS</h5>
+      <p>
+        <strong>STEP</strong>: Arrow Keys <br /> Move one tile.
+      </p>
+      <p>
+        <strong>SLASH</strong>: Arrow Keys + S<br /> Attack an adjacent space.
+      </p>
+      <p>
+        <strong>DASH</strong>: Arrow Keys + D<br /> Move one tile and attack an
+        adjacent space. Dasher is stunned next turn.
+      </p>
+      <p>
+        <strong>PARRY</strong>: Spacebar
+        <br /> Deflects all attacks this turn. Parrier is stunned next turn if
+        not attacked.
+      </p>
     </div>
   );
 };

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import PlayersPanel from "./components/PlayersPanel/PlayersPanel.jsx";
+import Players from "./components/Players/Players.jsx";
+import Instructions from "./components/Instructions/Instructions.jsx";
+import Status from "./components/Status/Status.jsx";
+import About from "./components/About/About.jsx";
+import { ReactComponent as SlashDanceTitle } from "./img/slash_dance.svg";
+
 import { v4 as uuid } from "uuid";
 
 import "./App.scss";
@@ -62,15 +67,32 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
-        <PlayersPanel
-          gameData={gameData}
-          name={name}
-          setName={setName}
-          addPlayer={addPlayer}
-          playerOnServer={playerOnServer}
-        />
+      <div className="game-title">
+        <SlashDanceTitle />
       </div>
+      <div className="interface-container">
+        <div className="left column">
+          <Status
+            gameData={gameData}
+            name={name}
+            playerOnServer={playerOnServer}
+          />
+          <Players
+            gameData={gameData}
+            name={name}
+            setName={setName}
+            addPlayer={addPlayer}
+            playerOnServer={playerOnServer}
+          />
+        </div>
+        <div className="game-placeholder">GAME GOES HERE</div>
+        <div className="right column">
+          <Instructions />
+        </div>
+      </div>
+      <footer>
+        <About />
+      </footer>
     </div>
   );
 };

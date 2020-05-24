@@ -1,10 +1,37 @@
-.App {
-  display: flex;
-  height: 500px;
-  width: 500px;
-}
+@import "css/colors";
+@import "css/sizes";
 
-#canvas_holder {
-  height: 500px;
-  width: 500px;
+.App {
+  padding-top: $spacing-medium;
+  width: 100%;
+
+  .game-title {
+    margin-bottom: $spacing-large;
+    text-align: center;
+  }
+
+  .interface-container {
+    display: flex;
+    justify-content: space-between;
+
+    .game-placeholder {
+      height: $game-panel-size;
+      width: $game-panel-size;
+    }
+  }
+
+  .panel {
+    background-color: $panel-background;
+    box-sizing: content-box;
+    padding: $spacing-small;
+  }
+
+  .column {
+    width: $column-width;
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+  }
 }

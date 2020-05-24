@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import PlayersPanel from "./PlayersPanel";
+import Status from "./Status";
 
 test("renders learn react link", () => {
-  const { getByText } = render(<PlayersPanel />);
-  const textElement = getByText(/PlayersPanel goes here/i);
+  const { getByText } = render(<Status />);
+  const textElement = getByText(/Status goes here/i);
   expect(textElement).toBeInTheDocument();
 });

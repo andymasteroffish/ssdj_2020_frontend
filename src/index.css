@@ -1,10 +1,40 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Roboto", sans-serif;
+  color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+input,
+ul,
+li {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+button {
+  border: 0;
+  border-radius: 0;
+}
+
+ul,
+li {
+  text-decoration: none;
+  margin: 0;
+  border: 0;
+}
+
+p {
+  font-size: 10px;
 }
 
 code {
@@ -18,26 +48,23 @@ code {
 .main-container {
   position: absolute;
   top: 0;
-  right: 0 ;
+  right: 0;
   left: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-
+  background-image: url("img/background.svg");
 }
 
 .game-panel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 10px solid tomato;
-  border-radius: 10px;
-  height: 500px;
-  width: 1000px;
+  position: relative;
+  width: 920px;
 }
 
 #canvas_holder {
-  height: 500px;
-  width: 500px;
+  position: absolute;
+  top: 100px;
+  left: calc(50% - 280px);
+  height: 560px;
+  width: 560px;
 }

@@ -1,0 +1,26 @@
+@import "../../css/colors";
+@import "../../css/sizes";
+
+.Players {
+  background: $green;
+
+  li {
+    color: $black;
+    font-size: 9px;
+    padding: $spacing-xsmall;
+  }
+
+  .current-player {
+    color: $red;
+  }
+
+  input {
+    width: 120px;
+  }
+
+  .player-list {
+    background-color: $text-display-background;
+    height: 190px;
+    overflow-y: auto;
+  }
+}
