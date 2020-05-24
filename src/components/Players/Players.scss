@@ -5,9 +5,14 @@
   height: 390px;
   li {
     font-size: 9px;
+    font-weight: bold;
     svg {
       margin-left: 4px;
     }
+  }
+
+  p {
+    font-size: 12px;
   }
 
   input {
@@ -18,6 +23,10 @@
   .player-list {
     height: 315px;
     overflow-y: auto;
+  }
+
+  .dead {
+    text-decoration: line-through;
   }
 
   .BaldyBlue {
