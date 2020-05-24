@@ -10,7 +10,7 @@ const Instructions = () => {
         Each turn, each player may input one of the following moves when the
         light flashes YELLOW.
       </p>
-      <h5>MOVES/CONTROLS</h5>
+      <h5>CONTROLS</h5>
       <p>
         <strong>STEP</strong>: Arrow Keys <br /> Move one tile.
       </p>

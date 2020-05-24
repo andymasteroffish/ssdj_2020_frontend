@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import "./Players.scss";
 
 const Players = props => {
-  const { name, setName, gameData, addPlayer, playerOnServer } = props;
+  const { name, setName, gameData, addPlayer, playerOnServer, myUuid } = props;
   const [tempName, setTempName] = useState("");
 
   const updateName = event => {
@@ -48,15 +50,13 @@ const Players = props => {
         </div>
       )}
       <h5>PLAYERS</h5>
-      <ul className="player-list">
+      <ul className="boxtext player-list">
         {players[0] &&
           players.map((data, idx) => {
             return (
-              <li
-                key={idx}
-                className={data.disp_name === name ? "current-player" : ""}
-              >
+              <li key={idx} className={data.sprite_pack}>
                 {data.disp_name}
+                {data.uuid === myUuid ? <FontAwesomeIcon icon={faStar} /> : ""}
               </li>
             );
           })}

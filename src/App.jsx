@@ -25,6 +25,8 @@ const App = () => {
     return player.uuid === myUuid;
   });
 
+  const serverMsg = gameData.waiting_message;
+
   const addPlayer = name => {
     const id = uuid();
     setMyUuid(id);
@@ -76,6 +78,7 @@ const App = () => {
             gameData={gameData}
             name={name}
             playerOnServer={playerOnServer}
+            serverMsg={serverMsg}
           />
           <Players
             gameData={gameData}
@@ -83,9 +86,10 @@ const App = () => {
             setName={setName}
             addPlayer={addPlayer}
             playerOnServer={playerOnServer}
+            myUuid={myUuid}
           />
         </div>
-        <div className="game-placeholder">GAME GOES HERE</div>
+        <div className="game-placeholder"></div>
         <div className="right column">
           <Instructions />
         </div>

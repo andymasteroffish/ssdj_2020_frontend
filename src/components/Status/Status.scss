@@ -1,6 +1,11 @@
 @import "../../css/sizes";
+@import "../../css/colors";
 
 .Status {
   height: 100px;
   margin-bottom: $spacing-large;
+
+  .status-box {
+    height: 60px;
+  }
 }

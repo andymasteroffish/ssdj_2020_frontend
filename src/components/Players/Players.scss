@@ -2,25 +2,53 @@
 @import "../../css/sizes";
 
 .Players {
-  background: $green;
-
+  height: 390px;
   li {
-    color: $black;
     font-size: 9px;
-    padding: $spacing-xsmall;
-  }
-
-  .current-player {
-    color: $red;
+    svg {
+      margin-left: 4px;
+    }
   }
 
   input {
     width: 120px;
+    margin-bottom: $spacing-medium;
   }
 
   .player-list {
-    background-color: $text-display-background;
-    height: 190px;
+    height: 315px;
     overflow-y: auto;
+  }
+
+  .BaldyBlue {
+    color: $baldy-blue;
+  }
+
+  .CrypticCyan {
+    color: $cryptic-cyan;
+  }
+
+  .GooeyGreen {
+    color: $gooey-green;
+  }
+
+  .OrneryOrange {
+    color: $ornery-orange;
+  }
+
+  .PlacidPink {
+    color: $placid-pink;
+  }
+
+  .RadRed {
+    color: $rad-red;
+  }
+
+  .ViciousViolet {
+    color: $vicious-violet;
+  }
+
+  .YummyYellow {
+    color: $yummy-yellow;
   }
 }
