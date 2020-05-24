@@ -107,8 +107,13 @@ function draw() {
 
   draw_game();
 
-  textAlign(LEFT);
-  text(waiting_message, width / 2 - 100, 80);
+  textAlign(CENTER);
+  textSize(20)
+  //stroke(253, 100, 78)
+  stroke(128,151,70)
+  strokeWeight(2)
+  fill(0)
+  text(waiting_message, width/2, 110);
 
 }
 
