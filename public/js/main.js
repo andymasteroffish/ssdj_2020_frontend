@@ -76,6 +76,7 @@ window.register_client_update_callback = function(callback) {
 function preload() {
   load_sounds();
   load_player_sprites();
+  load_ui_sprites()
 }
 
 //p5 setup function. called once everything loads
@@ -108,7 +109,7 @@ function draw() {
   draw_game();
 
   textAlign(LEFT);
-  text(waiting_message, width / 2 - 100, height / 2);
+  text(waiting_message, width / 2 - 100, 80);
 }
 
 //p5 key press function. triggers on keypress
@@ -121,10 +122,14 @@ function keyPressed() {
   game_keypress(keyCode);
 
   //toggle mute with 'm'
-  if (keyCode == 77) {
-    mute = !mute;
-    console.log("mute: " + mute);
-  }
+  // if (keyCode == 77) {
+  //   mute = !mute;
+  //   console.log("mute: " + mute);
+  // }
+}
+
+function mousePressed(){
+  check_mute_on_mouse(mouseX, mouseY)
 }
 
 //test commands to be called from console

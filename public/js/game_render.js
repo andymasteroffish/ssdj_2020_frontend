@@ -8,6 +8,14 @@ var cell_size = 35
 
 var anims = []
 
+var mute_icons = []
+var mute_icon_pos = {x:420,y:10}
+
+function load_ui_sprites(){
+	mute_icons.push(loadImage("img/ui/mute_off.png"))
+	mute_icons.push(loadImage("img/ui/mute_on.png"))
+}
+
 //renders the game to the canvas
 //called every frame
 function draw_game(){
@@ -16,6 +24,9 @@ function draw_game(){
 		draw_board()
 		draw_timing_ui()
 	}
+
+	//draw if we're muted
+	image(mute_icons[(mute ? 1 : 0)],mute_icon_pos.x, mute_icon_pos.y)
 }
 
 //draws the board to the canvas
@@ -117,14 +128,16 @@ function draw_timing_ui(){
 		line(0,10,total_width*(server_timer/turn_time),10)
 	}
 
+	
+
+	pop()
+
 	if (game_state == STATE_PLAYING){
 		fill(0)
 		noStroke()
-		textAlign(CENTER);
-		text("turn "+turn_num+" of "+max_turns, width/2, 30)
+		textAlign(LEFT);
+		text("turn "+turn_num, 20, 30)
 	}
-
-	pop()
 }
 
 function refresh_player_animators(players){
@@ -155,4 +168,11 @@ function draw_arrow(x,y,dir){
 	line(0,-line_length, side_dist, -line_length*0.25)
 
 	pop()
+}
+
+function check_mute_on_mouse(x,y){
+	console.log("checking")
+	if (x>mute_icon_pos.x && x<mute_icon_pos.x+mute_icons[0].width && y>mute_icon_pos.y && y<mute_icon_pos.y+mute_icons[0].height){
+		mute = !mute
+	}
 }

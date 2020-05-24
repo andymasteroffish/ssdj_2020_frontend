@@ -164,9 +164,7 @@ function draw_player_anim(anim, x, y){
 	translate(x,y)
 
 	let rotation = PI/2 * anim.owner.last_valid_input_dir
-	// if (anim.owner.input_dir == DIR_NONE){
-	// 	rotation = 0
-	// }
+	
 	rotate(rotation)
 
 	image(anim.sprite, -anim.sprite.width/2, -anim.sprite.height/2);
