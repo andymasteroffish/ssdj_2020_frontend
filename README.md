@@ -11,7 +11,7 @@ Reference pages here: https://p5js.org/reference/
 
 use yarn start to test
 
-ass this line to package.json to make build
+add this line to package.json to make build
   "homepage": "http://andymakesgames.com/extras/tests/ssdj_2020/build",
 
 ## Basic structure

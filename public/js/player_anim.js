@@ -47,16 +47,20 @@ function load_sprite_array(id_name, anim_name, num_frames){
 	let anim = []
 	for (let i=0; i<num_frames; i++){
 		anim.push( loadImage('img/'+id_name+"/"+anim_name+"_"+i.toString()+".png") )
+		//anim.push( loadImage('img/BigSprites/BaldyBlue2/'+anim_name+"_"+i.toString()+".png") )
 	}
 	return anim
 }
 
 function get_pack_from_id(id){
+	//id = "BaldyBlue"	//kill me
+
 	for (let i=0; i<player_packs.length; i++){
 		if (player_packs[i].id_name == id){
 			return player_packs[i]
 		}
 	}
+
 
 	console.log("could not find player sprite pack for id:"+id)
 	return null
