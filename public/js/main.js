@@ -107,14 +107,14 @@ function draw() {
 
   draw_game();
 
+  /*
   textAlign(CENTER);
   textSize(20)
-  //stroke(253, 100, 78)
   stroke(128,151,70)
   strokeWeight(2)
   fill(0)
   text(waiting_message, width/2, 110);
-
+  */
 }
 
 //p5 key press function. triggers on keypress
@@ -134,6 +134,7 @@ function keyPressed() {
 }
 
 function mousePressed(){
+  //console.log("")
   check_mute_on_mouse(mouseX, mouseY)
 }
 
