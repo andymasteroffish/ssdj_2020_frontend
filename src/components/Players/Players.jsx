@@ -68,7 +68,11 @@ const Players = props => {
           </form>
         </div>
       )}
-      {name && <p>Your name is: {name}</p>}
+      {name && (
+        <p>
+          Your name is: <strong>{name}</strong>
+        </p>
+      )}
 
       {gameData.game_state === 0 && name && !playerOnServer && (
         <div>
