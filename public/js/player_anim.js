@@ -51,11 +51,22 @@ function load_sprite_array(id_name, anim_name, num_frames){
 	return anim
 }
 
+function get_pack_from_id(id){
+	for (let i=0; i<player_packs.length; i++){
+		if (player_packs[i].id_name == id){
+			return player_packs[i]
+		}
+	}
+
+	console.log("could not find player sprite pack for id:"+id)
+	return null
+}
+
 function make_animator(player){
 	//defaults
 	let anim = {
 		owner:player,
-		pack:player_packs[player.sprite_pack],
+		pack: get_pack_from_id(player.sprite_pack),
 		timer:0,
 		frame:0,
 		state:ANIM_IDLE,
@@ -103,7 +114,7 @@ function update_player_anim(anim){
 		console.log("bail on anim. we'll try again next frame")
 
 		//it may be that the packs didn't load yet, so try again
-		anim.pack = player_packs[anim.owner.sprite_pack]
+		anim.pack = get_pack_from_id(anim.owner.sprite_pack)
 
 		return
 	}
