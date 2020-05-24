@@ -121,9 +121,10 @@ function draw_board(){
 			if (board[c][r].passable && !board[c][r].prev_passable){
 				//on animaiton beat, have it stay there then blink
 				if (cur_phase == 3 || cur_phase==0){
+					let sprite_id = Math.floor( board[c][r].rand_val * tree_sprites.length )
 					let blink_speed = 100
 					if (millis()%blink_speed < blink_speed/2 || cur_phase==3){
-						image(tree_sprite, c*cell_size, r*cell_size)
+						image(tree_sprites[sprite_id], c*cell_size, r*cell_size)
 					}
 				}
 			}
