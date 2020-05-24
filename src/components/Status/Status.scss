@@ -2,13 +2,15 @@
 @import "../../css/colors";
 
 .Status {
-  height: 100px;
+  min-height: 100px;
+  height: auto;
   margin-bottom: $spacing-large;
 
   .status-box {
     p {
       font-size: 14px;
     }
-    height: 60px;
+    min-height: 60px;
+    height: auto;
   }
 }
