@@ -31,7 +31,7 @@ var lava_fps = 7
 //showing winner on game over
 var game_over_display_time = 10000
 var game_over_timer = 0
-var prev_winner = null
+var winner_last_round = null
 
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
@@ -91,17 +91,17 @@ function draw_game(){
 		if (game_over_timer > 0){
 			let message = "NO WINNER"
 			let col = 255
-			if (prev_winner != null){
-				message = "WINNER:\n"+prev_winner.disp_name
+			if (winner_last_round != null){
+				message = "WINNER:\n"+winner_last_round.disp_name
 
-				if (prev_winner.sprite_pack == 'BaldyBlue')	col = "#00297D"
-				if (prev_winner.sprite_pack == 'CrypticCyan')	col = "#009F8C"
-				if (prev_winner.sprite_pack == 'GooeyGreen')	col = "#0E4300"
-				if (prev_winner.sprite_pack == 'OrneryOrange')	col = "#FF4200"
-				if (prev_winner.sprite_pack == 'PlacidPink')	col = "#FF008E"
-				if (prev_winner.sprite_pack == 'RadRed')	col = "#6E0019"
-				if (prev_winner.sprite_pack == 'ViciousViolet')	col = "#6200AE"
-				if (prev_winner.sprite_pack == 'YummyYellow')	col = "#9C8400"
+				if (winner_last_round.sprite_pack == 'BaldyBlue')	col = "#00297D"
+				if (winner_last_round.sprite_pack == 'CrypticCyan')	col = "#009F8C"
+				if (winner_last_round.sprite_pack == 'GooeyGreen')	col = "#0E4300"
+				if (winner_last_round.sprite_pack == 'OrneryOrange')	col = "#FF4200"
+				if (winner_last_round.sprite_pack == 'PlacidPink')	col = "#FF008E"
+				if (winner_last_round.sprite_pack == 'RadRed')	col = "#6E0019"
+				if (winner_last_round.sprite_pack == 'ViciousViolet')	col = "#6200AE"
+				if (winner_last_round.sprite_pack == 'YummyYellow')	col = "#9C8400"
 			}
 
 			fill(col)

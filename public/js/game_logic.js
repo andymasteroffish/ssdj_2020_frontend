@@ -16,7 +16,7 @@ var dash_key = 68	//d
 
 var input_info = null
 
-var prev_player_length = 0
+var prev_player_length = -1
 
 
 //once we get timing info from the server we can setup some values to use locally
@@ -174,7 +174,7 @@ function refresh_board(){
 	turn_num = queued_board.turn_num
 	max_turns = queued_board.max_turn_num
 
-	if (game_state == STATE_WAITING && players.length > prev_player_length && typeof play_join_sound == 'function'){
+	if (game_state == STATE_WAITING && players.length > prev_player_length && prev_player_length != -1){
 		console.log("play join sound")
 		play_join_sound()
 	}
@@ -200,7 +200,8 @@ function send_callback_info(_players, _game_state){
 	let info = {
 		players:_players,
 		game_state:_game_state,
-		waiting_message:waiting_message
+		waiting_message:waiting_message,
+		winner_last_round:winner_last_round
 	}
 	window.client_update_callback(info)
 }
