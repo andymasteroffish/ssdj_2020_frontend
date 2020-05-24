@@ -36,7 +36,15 @@
 
     p,
     li {
-      padding: $spacing-xsmall;
+      padding: 0 $spacing-xsmall;
+    }
+    p:first-child,
+    li:first-child {
+      padding-top: $spacing-xsmall;
+    }
+    p:last-child,
+    li:last-child {
+      padding-bottom: $spacing-xsmall;
     }
   }
 

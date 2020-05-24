@@ -37,6 +37,13 @@ p {
   font-size: 10px;
 }
 
+a {
+  color: #000;
+}
+a:visited {
+  color: #aaa;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
