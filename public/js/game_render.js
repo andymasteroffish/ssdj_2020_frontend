@@ -25,7 +25,7 @@ var symbol_parry = null
 
 //lava
 var lava_sprites = []
-var lava_warning_turns = 4
+var lava_warning_turns = 3
 var lava_fps = 7
 
 function load_ui_sprites(){
@@ -91,7 +91,7 @@ function draw_board(){
 	translate(cell_size/2,70+cell_size/2)
 
 	imageMode(CENTER)
-	tint(255)
+	//tint(255)
 
 	for (let i=0; i<anims.length; i++){
 		update_player_anim(anims[i])
@@ -105,7 +105,7 @@ function draw_board(){
 	//board
 	for (let c=0; c<cols; c++){
 		for (let r=0; r<rows; r++){
-			tint(255,alpha)
+			//tint(255,alpha)
 			image(grass_sprite, c*cell_size, r*cell_size)
 
 			if (board[c][r].passable == false){
@@ -131,9 +131,23 @@ function draw_board(){
 
 			//lava
 			if (board[c][r].lava_timer <= lava_warning_turns){
-				let lava_prc = (lava_warning_turns-board[c][r].lava_timer) / lava_warning_turns
-				if (lava_prc > 1)	lava_prc = 1
 
+				if (board[c][r].lava_timer <= 0){
+					let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
+					image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
+				}else{
+
+					let lava_prc = (lava_warning_turns-board[c][r].lava_timer) / lava_warning_turns
+					if (lava_prc > 1)	lava_prc = 1
+
+					let blink_speed = 150 +  (1.0-lava_prc) * 1000
+					if (millis()%blink_speed < blink_speed/2){
+						image(lava_sprites[0], c*cell_size, r*cell_size)
+					}
+				}
+
+
+				/*
 				let alpha_max = 255 * lava_prc
 				let alpha_prc = 0.5+sin( (millis()/1000)*5 )*0.5
 				let alpha = alpha_max * alpha_prc
@@ -141,10 +155,11 @@ function draw_board(){
 				if (board[c][r].lava_timer <= 0){
 					alpha = 255
 				}
+				*/
 
-				tint(255,alpha)
-				let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
-				image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
+				//tint(255,alpha)
+				//let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
+				//image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
 
 				//console.log("lava prc"+lava_prc)
 
@@ -159,7 +174,7 @@ function draw_board(){
 		}
 
 		//top row of grass
-		tint(255,alpha)
+		//tint(255,alpha)
 		image(grass_sprite, c*cell_size, -1*cell_size)
 	}
 	

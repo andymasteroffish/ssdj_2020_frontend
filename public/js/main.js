@@ -115,6 +115,9 @@ function draw() {
   fill(0)
   text(waiting_message, width/2, 110);
   */
+
+  fill(255,0,0)
+  text("fps:"+frameRate(),10,50)
 }
 
 //p5 key press function. triggers on keypress
