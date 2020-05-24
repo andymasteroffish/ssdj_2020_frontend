@@ -25,8 +25,13 @@ var symbol_parry = null
 
 //lava
 var lava_sprites = []
-var lava_warning_turns = 4
+var lava_warning_turns = 3
 var lava_fps = 7
+
+//showing winner on game over
+var game_over_display_time = 10000
+var game_over_timer = 0
+var prev_winner = null
 
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
@@ -80,6 +85,34 @@ function draw_game(){
 		draw_timing_ui()
 	}
 
+	//did we just end
+	if (game_state == STATE_WAITING){
+		game_over_timer -= delta_millis
+		if (game_over_timer > 0){
+			let message = "NO WINNER"
+			let col = 255
+			if (prev_winner != null){
+				message = "WINNER:\n"+prev_winner.disp_name
+
+				if (prev_winner.sprite_pack == 'BaldyBlue')	col = "#00297D"
+				if (prev_winner.sprite_pack == 'CrypticCyan')	col = "#009F8C"
+				if (prev_winner.sprite_pack == 'GooeyGreen')	col = "#0E4300"
+				if (prev_winner.sprite_pack == 'OrneryOrange')	col = "#FF4200"
+				if (prev_winner.sprite_pack == 'PlacidPink')	col = "#FF008E"
+				if (prev_winner.sprite_pack == 'RadRed')	col = "#6E0019"
+				if (prev_winner.sprite_pack == 'ViciousViolet')	col = "#6200AE"
+				if (prev_winner.sprite_pack == 'YummyYellow')	col = "#9C8400"
+			}
+
+			fill(col)
+			stroke(0)
+			strokeWeight(3)
+			textAlign(CENTER, CENTER)
+			textSize(50)
+			text(message, width/2, height/2)
+		}
+	}
+
 	//draw if we're muted
 	image(mute_icons[(mute ? 1 : 0)],mute_icon_pos.x, mute_icon_pos.y)
 }
@@ -91,7 +124,7 @@ function draw_board(){
 	translate(cell_size/2,70+cell_size/2)
 
 	imageMode(CENTER)
-	tint(255)
+	//tint(255)
 
 	for (let i=0; i<anims.length; i++){
 		update_player_anim(anims[i])
@@ -105,7 +138,7 @@ function draw_board(){
 	//board
 	for (let c=0; c<cols; c++){
 		for (let r=0; r<rows; r++){
-			tint(255,alpha)
+			//tint(255,alpha)
 			image(grass_sprite, c*cell_size, r*cell_size)
 
 			if (board[c][r].passable == false){
@@ -131,9 +164,23 @@ function draw_board(){
 
 			//lava
 			if (board[c][r].lava_timer <= lava_warning_turns){
-				let lava_prc = (lava_warning_turns-board[c][r].lava_timer) / lava_warning_turns
-				if (lava_prc > 1)	lava_prc = 1
 
+				if (board[c][r].lava_timer <= 0){
+					let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
+					image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
+				}else{
+
+					let lava_prc = (lava_warning_turns-board[c][r].lava_timer) / lava_warning_turns
+					if (lava_prc > 1)	lava_prc = 1
+
+					let blink_speed = 150 +  (1.0-lava_prc) * 1000
+					if (millis()%blink_speed < blink_speed/2){
+						image(lava_sprites[0], c*cell_size, r*cell_size)
+					}
+				}
+
+
+				/*
 				let alpha_max = 255 * lava_prc
 				let alpha_prc = 0.5+sin( (millis()/1000)*5 )*0.5
 				let alpha = alpha_max * alpha_prc
@@ -141,10 +188,11 @@ function draw_board(){
 				if (board[c][r].lava_timer <= 0){
 					alpha = 255
 				}
+				*/
 
-				tint(255,alpha)
-				let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
-				image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
+				//tint(255,alpha)
+				//let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
+				//image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
 
 				//console.log("lava prc"+lava_prc)
 
@@ -159,7 +207,7 @@ function draw_board(){
 		}
 
 		//top row of grass
-		tint(255,alpha)
+		//tint(255,alpha)
 		image(grass_sprite, c*cell_size, -1*cell_size)
 	}
 	
