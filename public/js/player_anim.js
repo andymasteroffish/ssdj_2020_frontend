@@ -210,6 +210,6 @@ function draw_name_tag(anim){
 	fill(10,140)
 	noStroke()
 	textSize(15)
-	text(anim.owner.disp_name, 0, -14)
+	text(anim.owner.disp_name, 0, -23)
 	pop()
 }
