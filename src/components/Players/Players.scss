@@ -3,9 +3,11 @@
 
 .Players {
   height: auto;
+
   li {
-    font-size: 9px;
+    font-size: 14px;
     font-weight: bold;
+
     svg {
       margin-left: 4px;
     }
@@ -16,9 +18,9 @@
   }
 
   input {
-    width: 110px;
-    padding: $spacing-xsmall;
     margin-bottom: $spacing-medium;
+    padding: $spacing-xsmall;
+    width: 110px;
   }
 
   .player-list {
@@ -29,37 +31,5 @@
 
   .dead {
     text-decoration: line-through;
-  }
-
-  .BaldyBlue {
-    color: $baldy-blue;
-  }
-
-  .CrypticCyan {
-    color: $cryptic-cyan;
-  }
-
-  .GooeyGreen {
-    color: $gooey-green;
-  }
-
-  .OrneryOrange {
-    color: $ornery-orange;
-  }
-
-  .PlacidPink {
-    color: $placid-pink;
-  }
-
-  .RadRed {
-    color: $rad-red;
-  }
-
-  .ViciousViolet {
-    color: $vicious-violet;
-  }
-
-  .YummyYellow {
-    color: $yummy-yellow;
   }
 }
