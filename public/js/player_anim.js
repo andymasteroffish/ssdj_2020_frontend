@@ -179,15 +179,13 @@ function get_sprite_frames(pack, state){
 	return null
 }
 
-function draw_player_anim(anim, x, y){
+function draw_player_anim(anim){
 	if (anim.sprite == null){
 		//console.log("bail on null sprite")
-		fill(255,0,0)
-		ellipse(x,y,10)
 		return
 	}
 	push()
-	translate(x,y)
+	translate(anim.draw_pos.x,anim.draw_pos.y)
 
 	let rotation = PI/2 * anim.owner.last_valid_input_dir
 
@@ -197,14 +195,16 @@ function draw_player_anim(anim, x, y){
 
 	pop()
 
+	
+}
+
+function draw_name_tag(anim){
 	push()
-	translate(x,y)
+	translate(anim.draw_pos.x, anim.draw_pos.y)
 	//little name tag
 	textAlign(CENTER);
 	fill(255,100)
 	noStroke()
 	text(anim.owner.disp_name, 0, -14)
 	pop()
-
-	
 }

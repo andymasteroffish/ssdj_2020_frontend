@@ -39,7 +39,6 @@ function draw_board(){
 		update_player_anim(anims[i])
 	}
 
-	//i don't think this is used
 	let anim_prc = 1
 	if (turn_timer > anim_start_time && turn_timer < anim_end_time){
 		anim_prc = map(turn_timer, anim_start_time, anim_end_time, 0, 1)
@@ -56,7 +55,6 @@ function draw_board(){
 				fill(20)
 				ellipse(c*cell_size, r*cell_size, 5)
 			}
-
 		}
 	}
 
@@ -66,9 +64,39 @@ function draw_board(){
 
 		let pos_x = anim_prc*player.x + (1.0-anim_prc)*player.prev_state.x
 		let pos_y = anim_prc*player.y + (1.0-anim_prc)*player.prev_state.y
-		
-		draw_player_anim(anims[i], pos_x*cell_size, pos_y*cell_size)
 
+		//jabbing forward then back on slash or if a move failed
+		if (player.move_info != null){
+			if (player.move_info.succeeded == false || player.input_type == INPUT_SLASH){
+				let jab_prc = anim_prc
+				//delaying the slash movemet
+				if(player.input_type == INPUT_SLASH){
+					let new_floor = 0.75
+					if (jab_prc < new_floor){
+						jab_prc = 0
+					}else{
+						jab_prc = map(jab_prc,new_floor,1, 0,1, true)
+					}
+				}
+				//have it go form 0 to 0.5 and then back down
+				if (jab_prc > 0.5)	jab_prc = 1.0-anim_prc
+
+				let other_x = player.move_info.target_pos.x
+				let other_y = player.move_info.target_pos.y
+				pos_x = (1.0-jab_prc)*player.x + jab_prc*other_x
+				pos_y = (1.0-jab_prc)*player.y + jab_prc*other_y
+			}
+		}
+		
+		anims[i].draw_pos = {x : pos_x*cell_size, y : pos_y*cell_size}
+		draw_player_anim(anims[i])
+	}
+
+	//name tags
+	for (let i=0; i<anims.length; i++){
+		if (!anims[i].owner.is_dead){
+			draw_name_tag(anims[i])
+		}
 	}
 	pop()
 }
@@ -149,6 +177,10 @@ function refresh_player_animators(players){
 		anims.push( make_animator(players[i]))
 	}
 
+	//sort so the dead are draw first
+	anims.sort(function(a,b){
+		return (a.owner.is_dead) ? -1 : 1
+	})
 }
 
 //draws an arrow at the given location
