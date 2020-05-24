@@ -19,21 +19,14 @@ const App = () => {
   const [joined, setJoined] = useState(false);
   const [joining, setJoining] = useState(false);
   const [myUuid, setMyUuid] = useState("");
-  const [currentChamp, setCurrentChamp] = useState("");
 
   const gameState = gameData.game_state;
   const players = gameData.players;
+  const currentChamp = gameData.winner_last_round;
+
   const playerOnServer = players.some(player => {
     return player.uuid === myUuid;
   });
-
-  const winner = players.find(player => {
-    return player.win_streak > 0;
-  });
-
-  if (winner && winner.uuid !== currentChamp.uuid) {
-    setCurrentChamp(winner)
-  }
 
   const serverMsg = gameData.waiting_message;
 
@@ -88,7 +81,7 @@ const App = () => {
         <div className="left column">
           <Status
             gameData={gameData}
-            name={name}
+            myUuid={myUuid}
             playerOnServer={playerOnServer}
             serverMsg={serverMsg}
             currentChamp={currentChamp}
