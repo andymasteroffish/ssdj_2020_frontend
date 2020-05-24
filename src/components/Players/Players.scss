@@ -13,19 +13,29 @@
     }
   }
 
-  p {
-    font-size: 12px;
-  }
-
   input {
     margin-bottom: $spacing-medium;
     padding: $spacing-xsmall;
     width: 110px;
   }
 
+  .name-display {
+    min-height: 89px;
+
+    p,
+    input {
+      font-size: 18px;
+      padding: $spacing-xsmall;
+    }
+
+    input {
+      background-color: $text-display-background;
+    }
+  }
+
   .player-list {
     height: auto;
-    min-height: 300px;
+    min-height: 265px;
     overflow-y: auto;
   }
 
