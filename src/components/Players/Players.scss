@@ -2,7 +2,7 @@
 @import "../../css/sizes";
 
 .Players {
-  height: 390px;
+  height: auto;
   li {
     font-size: 9px;
     font-weight: bold;
@@ -22,7 +22,8 @@
   }
 
   .player-list {
-    height: 315px;
+    height: auto;
+    min-height: 300px;
     overflow-y: auto;
   }
 

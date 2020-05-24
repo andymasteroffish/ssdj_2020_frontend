@@ -18,7 +18,7 @@ const App = () => {
   const [name, setName] = useState("");
   const [joined, setJoined] = useState(false);
   const [joining, setJoining] = useState(false);
-  const [myUuid, setMyUuid] = useState("");
+  const [myUuid, setMyUuid] = useState();
 
   const gameState = gameData.game_state;
   const players = gameData.players;
