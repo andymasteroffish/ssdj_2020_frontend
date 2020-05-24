@@ -4,12 +4,12 @@
 // I handle drawing the game to the p5 canvas
 //----------------------
 
-var cell_size = 35
+var cell_size = 35*2
 
 var anims = []
 
 var mute_icons = []
-var mute_icon_pos = {x:420,y:10}
+var mute_icon_pos = {x:500,y:10}
 
 //environment sprites
 var timer_sprites = []
@@ -22,7 +22,7 @@ function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_on.png"))
 
 	for (let i=0; i<5; i++){
-		timer_sprites.push(loadImage("img/Environment/status_"+i.toString()+".png"))
+		timer_sprites.push(loadImage("img/Layout/status_"+i.toString()+".png"))
 	}
 	rock_sprite = loadImage("img/Environment/rock.png")
 	tree_sprite = loadImage("img/Environment/tree.png")
@@ -46,7 +46,7 @@ function draw_game(){
 //will animate things from their previous state depending on time
 function draw_board(){
 	push()
-	translate(cell_size/2,110)
+	translate(cell_size/2,70+cell_size/2)
 
 	imageMode(CENTER)
 
@@ -77,7 +77,12 @@ function draw_board(){
 			// 	ellipse(c*cell_size, r*cell_size, 5)
 			// }
 		}
+
+		//top row of grass
+		image(grass_sprite, c*cell_size, -1*cell_size)
 	}
+	
+	
 
 	//players
 	for (let i=0; i<anims.length; i++){
@@ -127,7 +132,7 @@ function draw_timing_ui(){
 	
 	push()
 
-	translate(width/2-timer_sprites[0].width/2, 20)
+	translate(width/2-timer_sprites[0].width/2, 0)
 	image(timer_sprites[cur_phase+1], 0, 0)
 
 	pop()
@@ -234,7 +239,6 @@ function draw_arrow(x,y,dir){
 }
 
 function check_mute_on_mouse(x,y){
-	console.log("checking")
 	if (x>mute_icon_pos.x && x<mute_icon_pos.x+mute_icons[0].width && y>mute_icon_pos.y && y<mute_icon_pos.y+mute_icons[0].height){
 		mute = !mute
 	}

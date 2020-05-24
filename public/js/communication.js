@@ -93,6 +93,10 @@ function process_msg(data) {
     //window.client_update_callback(msg.info.players);
   }
 
+  if (msg.type === "join_rejected"){
+    console.log("i got rejected: "+msg.reason)
+  }
+
   //this might cause some issues, but probably ok???
   if (msg.info && msg.info.players) {
     send_callback_info(msg.info.players, game_state);

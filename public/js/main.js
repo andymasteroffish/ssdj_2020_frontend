@@ -65,7 +65,6 @@ var waiting_message = "Waiting on server";
 
 //hooks
 window.client_update_callback = function () {};
-
 window.register_client_update_callback = function(callback) {
   window.client_update_callback = callback;
 };
@@ -84,7 +83,7 @@ function preload() {
 //https://p5js.org/reference/#/p5/setup
 function setup() {
   //creates the canvas where the p5 sketch will render
-  var canv = createCanvas(315, 500);
+  var canv = createCanvas(560, 560);
   canv.parent("canvas_holder"); //put the canvas in the right div, otherwise if just adds a new element to the DOM
 
   //set the sound playback volume
@@ -110,6 +109,7 @@ function draw() {
 
   textAlign(LEFT);
   text(waiting_message, width / 2 - 100, 80);
+
 }
 
 //p5 key press function. triggers on keypress
