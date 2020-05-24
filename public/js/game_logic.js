@@ -118,8 +118,8 @@ function game_keypress(keyCode){
 				input2 = keyCode
 
 				input_info = make_user_input(input1, input2)
-				console.log(input_info)
-				console.log("it took "+(millis()-(input_send_time-input_time_window)))
+				//console.log(input_info)
+				//console.log("it took "+(millis()-(input_send_time-input_time_window)))
 
 				send_user_input(input_info)
 			}

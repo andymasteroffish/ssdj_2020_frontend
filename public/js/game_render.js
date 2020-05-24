@@ -24,8 +24,9 @@ var symbol_dash = []
 var symbol_parry = null
 
 //lava
-
+var lava_sprites = []
 var lava_warning_turns = 4
+var lava_fps = 7
 
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
@@ -37,6 +38,10 @@ function load_ui_sprites(){
 	rock_sprite = loadImage("img/Environment/rock_0.png")
 	tree_sprite = loadImage("img/Environment/tree_0.png")
 	grass_sprite = loadImage("img/Environment/grass.png")
+
+	for (let i=0; i<9; i++){
+		lava_sprites.push( loadImage("img/Environment/lava_"+i.toString()+".png") )
+	}
 
 	symbol_parry = loadImage("img/Symbols/parry.png")
 
@@ -82,6 +87,7 @@ function draw_board(){
 	translate(cell_size/2,70+cell_size/2)
 
 	imageMode(CENTER)
+	tint(255)
 
 	for (let i=0; i<anims.length; i++){
 		update_player_anim(anims[i])
@@ -95,7 +101,7 @@ function draw_board(){
 	//board
 	for (let c=0; c<cols; c++){
 		for (let r=0; r<rows; r++){
-
+			tint(255,alpha)
 			image(grass_sprite, c*cell_size, r*cell_size)
 
 			if (board[c][r].passable == false){
@@ -130,12 +136,16 @@ function draw_board(){
 					alpha = 255
 				}
 
+				tint(255,alpha)
+				let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
+				image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
+
 				//console.log("lava prc"+lava_prc)
 
-				fill(255,0,0, alpha)
-				noStroke()
-				let lava_test_size = cell_size*0.8
-				rect(c*cell_size-lava_test_size/2, r*cell_size-lava_test_size/2, lava_test_size, lava_test_size)
+				// fill(255,0,0, alpha)
+				// noStroke()
+				// let lava_test_size = cell_size*0.8
+				// rect(c*cell_size-lava_test_size/2, r*cell_size-lava_test_size/2, lava_test_size, lava_test_size)
 
 			}
 			// fill(255,0,0)
@@ -143,6 +153,7 @@ function draw_board(){
 		}
 
 		//top row of grass
+		tint(255,alpha)
 		image(grass_sprite, c*cell_size, -1*cell_size)
 	}
 	
