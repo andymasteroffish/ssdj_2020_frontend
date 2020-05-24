@@ -6,9 +6,9 @@
 
 var socket;
 
-var remote_adress = "ws://ssdj-game.herokuapp.com:80";
+//var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-//var remote_adress = "ws://localhost:3001";
+var remote_adress = "ws://localhost:3001";
 
 socket = new WebSocket(remote_adress);
 //things to happen once socket is connected
@@ -110,7 +110,7 @@ function get_board(info) {
   queued_board = info;
   waiting_for_board = false;
 
-  prev_winner = info.winner_last_round
+  winner_last_round = info.winner_last_round
 
   //if this is the first ping, do some stuff
   if (board == null) {
