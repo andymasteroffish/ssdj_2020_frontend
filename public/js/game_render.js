@@ -66,16 +66,23 @@ function draw_board(){
 			image(grass_sprite, c*cell_size, r*cell_size)
 
 			if (board[c][r].passable == false){
-				if (c==0 || c==cols-1 || r==0 || r==rows-1 ){
-					image(rock_sprite, c*cell_size, r*cell_size)
-				}else{
+				if (board[c][r].weak){
 					image(tree_sprite, c*cell_size, r*cell_size)
+				}else{
+					image(rock_sprite, c*cell_size, r*cell_size)
 				}
 			}
-			// else{
-			// 	fill(20)
-			// 	ellipse(c*cell_size, r*cell_size, 5)
-			// }
+
+			//if a tree just got cut down, have it blink
+			if (board[c][r].passable && !board[c][r].prev_passable){
+				//on animaiton beat, have it stay there then blink
+				if (cur_phase == 3 || cur_phase==0){
+					let blink_speed = 100
+					if (millis()%blink_speed < blink_speed/2 || cur_phase==3){
+						image(tree_sprite, c*cell_size, r*cell_size)
+					}
+				}
+			}
 		}
 
 		//top row of grass
