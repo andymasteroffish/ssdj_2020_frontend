@@ -45,10 +45,8 @@ function update_game(){
 
 	//do we have input waiting to send?
 	if (input1 != null && input_info == null && millis() >= input_send_time){
-		console.log("you had your chance")
-
 		input_info = make_user_input(input1, input2)
-		console.log(input_info)
+		//console.log(input_info)
 		send_user_input(input_info)
 	}
 

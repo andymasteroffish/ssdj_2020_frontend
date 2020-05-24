@@ -79,7 +79,7 @@ function process_msg(data) {
     if (game_state != STATE_PLAYING) {
       game_state = STATE_PLAYING;
     }
-    console.log("pulse phase:" + msg.phase);
+    //console.log("pulse phase:" + msg.phase);
     let prc = msg.phase * 0.25;
     server_timer = turn_time * prc - padding_before_display;
     if (server_timer < 0) {
