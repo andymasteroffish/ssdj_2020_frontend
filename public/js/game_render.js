@@ -95,9 +95,9 @@ function draw_game(){
 				message = "WINNER:\n"+prev_winner.disp_name
 
 				if (prev_winner.sprite_pack == 'BaldyBlue')	col = "#00297D"
-				if (prev_winner.sprite_pack == 'CrypticCyan')	col = "##009F8C"
-				if (prev_winner.sprite_pack == 'GooeyGreen')	col = "##0E4300"
-				if (prev_winner.sprite_pack == 'OrneryOrange')	col = "##FF4200"
+				if (prev_winner.sprite_pack == 'CrypticCyan')	col = "#009F8C"
+				if (prev_winner.sprite_pack == 'GooeyGreen')	col = "#0E4300"
+				if (prev_winner.sprite_pack == 'OrneryOrange')	col = "#FF4200"
 				if (prev_winner.sprite_pack == 'PlacidPink')	col = "#FF008E"
 				if (prev_winner.sprite_pack == 'RadRed')	col = "#6E0019"
 				if (prev_winner.sprite_pack == 'ViciousViolet')	col = "#6200AE"
