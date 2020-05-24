@@ -58,11 +58,9 @@ code {
   right: 0;
   left: 0;
   bottom: 0;
+  z-index: -2;
   display: flex;
   justify-content: center;
-  background-image: url("img/background.png");
-  background-position: center bottom;
-  background-repeat: repeat-x;
   background-color: #abfafc;
 }
 

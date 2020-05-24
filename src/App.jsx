@@ -4,6 +4,7 @@ import Instructions from "./components/Instructions/Instructions.jsx";
 import Status from "./components/Status/Status.jsx";
 import About from "./components/About/About.jsx";
 import { ReactComponent as SlashDanceTitle } from "./img/slash_dance.svg";
+import { ReactComponent as Background } from "./img/background.png";
 
 import { v4 as uuid } from "uuid";
 
@@ -108,7 +109,9 @@ const App = () => {
       </div>
       <footer>
         <About />
+
       </footer>
+      <div className='backdrop'></div>
     </div>
   );
 };
