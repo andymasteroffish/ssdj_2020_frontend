@@ -11,9 +11,22 @@ var anims = []
 var mute_icons = []
 var mute_icon_pos = {x:420,y:10}
 
+//environment sprites
+var timer_sprites = []
+var grass_sprite = null
+var rock_sprite = null
+var tress_sprite = null
+
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
 	mute_icons.push(loadImage("img/ui/mute_on.png"))
+
+	for (let i=0; i<5; i++){
+		timer_sprites.push(loadImage("img/Environment/status_"+i.toString()+".png"))
+	}
+	rock_sprite = loadImage("img/Environment/rock.png")
+	tree_sprite = loadImage("img/Environment/tree.png")
+	grass_sprite = loadImage("img/Environment/grass.png")
 }
 
 //renders the game to the canvas
@@ -35,6 +48,8 @@ function draw_board(){
 	push()
 	translate(cell_size/2,110)
 
+	imageMode(CENTER)
+
 	for (let i=0; i<anims.length; i++){
 		update_player_anim(anims[i])
 	}
@@ -48,13 +63,19 @@ function draw_board(){
 	for (let c=0; c<cols; c++){
 		for (let r=0; r<rows; r++){
 
+			image(grass_sprite, c*cell_size, r*cell_size)
+
 			if (board[c][r].passable == false){
-				fill(117, 49, 0)
-				rect(c*cell_size-cell_size/2, r*cell_size-cell_size/2, cell_size*0.85, cell_size*0.85)
-			}else{
-				fill(20)
-				ellipse(c*cell_size, r*cell_size, 5)
+				if (c==0 || c==cols-1 || r==0 || r==rows-1 ){
+					image(rock_sprite, c*cell_size, r*cell_size)
+				}else{
+					image(tree_sprite, c*cell_size, r*cell_size)
+				}
 			}
+			// else{
+			// 	fill(20)
+			// 	ellipse(c*cell_size, r*cell_size, 5)
+			// }
 		}
 	}
 

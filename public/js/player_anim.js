@@ -191,7 +191,7 @@ function draw_player_anim(anim){
 
 	rotate(rotation)
 
-	image(anim.sprite, -anim.sprite.width/2, -anim.sprite.height/2);
+	image(anim.sprite,0,0)// -anim.sprite.width/2, -anim.sprite.height/2);
 
 	pop()
 
