@@ -4,7 +4,7 @@ import Instructions from "./../Instructions/Instructions.jsx";
 import "./PlayersPanel.scss";
 
 const PlayersPanel = props => {
-  const { name, setName, gameData, addPlayer, joined } = props;
+  const { name, setName, gameData, addPlayer, playerOnServer } = props;
   const [tempName, setTempName] = useState("");
 
   const updateName = event => {
@@ -12,6 +12,9 @@ const PlayersPanel = props => {
   };
 
   const savePlayerName = () => {
+    if (tempName === "") {
+      return;
+    }
     setName(tempName);
     if (gameData.game_state === 0) {
       console.log("JOINING WAITING SERVER ON NAME ADD");
@@ -21,12 +24,23 @@ const PlayersPanel = props => {
 
   const players = gameData.players;
 
+  const handleRejoin = () => {
+    if (gameData.game_state === 0) {
+      console.log("JOINING PLAYER READY CLICK");
+      addPlayer(name);
+    }
+  };
+
   return (
     <div className="PlayersPanel">
       {!name && (
         <div>
-          <input type="text" value={tempName} onChange={updateName} />
-          <button onClick={savePlayerName}>Join</button>
+          <form onSubmit={savePlayerName}>
+            <input type="text" value={tempName} onChange={updateName} />
+            <button type="submit" onClick={savePlayerName}>
+              Join
+            </button>
+          </form>
         </div>
       )}
       {name && (
@@ -34,18 +48,26 @@ const PlayersPanel = props => {
           <h2>Your name is: {name}</h2>
         </div>
       )}
-      {gameData.game_state !== 0 && name && !joined && (
+      {gameData.game_state !== 0 && name && !playerOnServer && (
         <div>
           <h3>Waiting to join when new game starts....</h3>
         </div>
       )}
-      {gameData.game_state === 0 && name && joined && (
+      {gameData.game_state === 0 && name && playerOnServer && (
         <div>
           <h3>Waiting to start game when others join....</h3>
         </div>
       )}
+      {gameData.game_state === 0 && name && !playerOnServer && (
+        <div>
+          <button onClick={handleRejoin}>Click to rejoin</button>
+        </div>
+      )}
       <table className="player-data-table">
         <thead>
+          <tr>
+            <th colSpan="2">Current players</th>
+          </tr>
           <tr>
             <th>Name</th>
             <th>Games Played</th>

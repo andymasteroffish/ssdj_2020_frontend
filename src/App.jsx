@@ -9,20 +9,29 @@ const App = () => {
     players: [],
     game_state: undefined
   });
+  const [name, setName] = useState("");
+  const [joined, setJoined] = useState(false);
+  const [joining, setJoining] = useState(false);
+  const [myUuid, setMyUuid] = useState("");
 
   const gameState = gameData.game_state;
-
-  const [name, setName] = useState("");
-  const [joined, setJoined] = useState("");
+  const players = gameData.players;
+  const playerOnServer = players.some(player => {
+    return player.uuid === myUuid;
+  });
 
   const addPlayer = name => {
+    const id = uuid();
+    setMyUuid(id);
     console.log(`ADD PLAYER: ${name}`);
     const val = {
       type: "join_request",
       disp_name: name,
-      uuid: uuid()
+      uuid: id
     };
+
     setJoined(true);
+    setJoining(true);
     window.socket.send(JSON.stringify(val));
   };
 
@@ -37,11 +46,19 @@ const App = () => {
   }, [gameLoaded]);
 
   useEffect(() => {
-    if (gameState === 0 && !joined && name) {
+    if (!joining && !joined && gameState === 0 && !playerOnServer && myUuid) {
       console.log("JOINING IN RESPONSE TO STATE CHANGE");
-      addPlayer(name);
+      // addPlayer(name);
     }
-  }, [gameState, joined, name]);
+  }, [gameState, playerOnServer, myUuid, name, joining, joined]);
+
+  useEffect(() => {
+    if (joined && !joining && !playerOnServer) {
+      setJoined(false);
+    } else if (joined && joining && playerOnServer) {
+      setJoining(false);
+    }
+  }, [joined, joining, playerOnServer]);
 
   return (
     <div className="App">
@@ -51,7 +68,7 @@ const App = () => {
           name={name}
           setName={setName}
           addPlayer={addPlayer}
-          joined={joined}
+          playerOnServer={playerOnServer}
         />
       </div>
     </div>

@@ -12,18 +12,18 @@ $purple: #680871;
   }
 
   .player-data-table {
-    border-left:  1px solid $purple;
-    border-top:  1px solid $purple;
-    border-bottom:  1px solid $purple;
+    border-left: 1px solid $purple;
+    border-top: 1px solid $purple;
+    border-bottom: 1px solid $purple;
     border-spacing: 0;
 
-    th, td {
+    th,
+    td {
       width: 90px;
       border-right: 1px solid $purple;
     }
     th {
       border-bottom: 3px solid $purple;
     }
-
   }
 }
