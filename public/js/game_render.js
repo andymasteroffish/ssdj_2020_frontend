@@ -9,7 +9,7 @@ var cell_size = 35*2
 var anims = []
 
 var mute_icons = []
-var mute_icon_pos = {x:500,y:10}
+var mute_icon_pos = {x:5,y:5}
 
 //environment sprites
 var timer_sprites = []
@@ -137,70 +137,14 @@ function draw_timing_ui(){
 
 	pop()
 
-	/*
-	let spacing = 50
-	let total_width = spacing*4
-	let time_prc = turn_timer/turn_time
-
-	push()
-	translate(width/2-(spacing*3)/2-cell_size/2,40)
-	
-
-	let base_size = 20
-	let big_size = 40
-	let shrink_time = 200
-
-	//draw nodes
-	for (let i=0; i<4; i++){
-		let target_time = i * (turn_time/4)
-
-		fill(200)
-		if (i==2)	fill(255, 163, 5)
-		if (i==3)	fill(255, 0, 25)
-
-		let small_size = base_size
-		if (turn_timer>target_time && i==2){
-			small_size = 30
-		}
-		let size = small_size
-		
-		if (turn_timer>target_time && turn_timer<target_time+shrink_time){
-			let prc = (turn_timer-target_time) / shrink_time
-			size = prc * small_size + (1-prc)*big_size
-		}
-		ellipse(i*spacing,0, size, size)
-
-		//drawing the arrow
-		if (i==2 && input_info != null){
-			if (input_info.action == INPUT_PARRY){
-				stroke(0)
-				noFill()
-				ellipse(i*spacing,0, size*0.6, size*0.6)
-			}
-			if (input_info.dir != DIR_NONE){
-				draw_arrow(i*spacing,0,input_info.dir)
-			}
-		}
-	}
-
-	//draw test lines
-	if (false){
-		stroke(0)
-		line(0,0,total_width*time_prc,0)
-		stroke(200,50,50)
-		line(0,10,total_width*(server_timer/turn_time),10)
-	}
-
-	
-
-	pop()
-	*/
 
 	if (game_state == STATE_PLAYING){
-		fill(0)
-		noStroke()
-		textAlign(LEFT);
-		text("turn "+turn_num, 20, 30)
+	  textSize(20)
+	  //stroke(253, 100, 78)
+	  stroke(128,151,70)
+	  strokeWeight(2)
+	  fill(0)
+	  text("Turn "+turn_num, width/2, 110);
 	}
 }
 
