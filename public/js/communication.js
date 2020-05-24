@@ -8,7 +8,7 @@ var socket;
 
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-// var remote_adress = "ws://localhost:3001";
+//var remote_adress = "ws://localhost:3001";
 
 socket = new WebSocket(remote_adress);
 //things to happen once socket is connected

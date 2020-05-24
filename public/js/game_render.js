@@ -14,10 +14,19 @@ var mute_icon_pos = {x:5,y:5}
 //environment sprites
 var timer_sprites = []
 var grass_sprite = null
-var rock_sprite = null
-var tress_sprite = null
+var rock_sprites = []
+var tree_sprites = []
 
+//input icons
+var symbol_move = []
+var symbol_slash = []
+var symbol_dash = []
+var symbol_parry = null
+
+//lava
+var lava_sprites = []
 var lava_warning_turns = 4
+var lava_fps = 7
 
 function load_ui_sprites(){
 	mute_icons.push(loadImage("img/ui/mute_off.png"))
@@ -26,9 +35,40 @@ function load_ui_sprites(){
 	for (let i=0; i<5; i++){
 		timer_sprites.push(loadImage("img/Layout/status_"+i.toString()+".png"))
 	}
-	rock_sprite = loadImage("img/Environment/rock.png")
-	tree_sprite = loadImage("img/Environment/tree.png")
+	
+	for (let i=0; i<3; i++){
+		rock_sprites.push(loadImage("img/Environment/rock_"+i.toString()+".png"))
+		tree_sprites.push(loadImage("img/Environment/tree_"+i.toString()+".png"))
+	}
+	
 	grass_sprite = loadImage("img/Environment/grass.png")
+
+	for (let i=0; i<9; i++){
+		lava_sprites.push( loadImage("img/Environment/lava_"+i.toString()+".png") )
+	}
+
+	symbol_parry = loadImage("img/Symbols/parry.png")
+
+	for (let i=0; i<4; i++){
+		symbol_move.push(null)
+		symbol_slash.push(null)
+		symbol_dash.push(null)
+	}
+	symbol_move[DIR_UP] = loadImage("img/Symbols/up.png")
+	symbol_move[DIR_RIGHT] = loadImage("img/Symbols/right.png")
+	symbol_move[DIR_DOWN] = loadImage("img/Symbols/down.png")
+	symbol_move[DIR_LEFT] = loadImage("img/Symbols/left.png")
+
+	symbol_slash[DIR_UP] = loadImage("img/Symbols/slash_up.png")
+	symbol_slash[DIR_RIGHT] = loadImage("img/Symbols/slash_right.png")
+	symbol_slash[DIR_DOWN] = loadImage("img/Symbols/slash_down.png")
+	symbol_slash[DIR_LEFT] = loadImage("img/Symbols/slash_left.png")
+
+	symbol_dash[DIR_UP] = loadImage("img/Symbols/dash_up.png")
+	symbol_dash[DIR_RIGHT] = loadImage("img/Symbols/dash_right.png")
+	symbol_dash[DIR_DOWN] = loadImage("img/Symbols/dash_down.png")
+	symbol_dash[DIR_LEFT] = loadImage("img/Symbols/dash_left.png")
+	
 }
 
 //renders the game to the canvas
@@ -51,6 +91,7 @@ function draw_board(){
 	translate(cell_size/2,70+cell_size/2)
 
 	imageMode(CENTER)
+	tint(255)
 
 	for (let i=0; i<anims.length; i++){
 		update_player_anim(anims[i])
@@ -64,14 +105,15 @@ function draw_board(){
 	//board
 	for (let c=0; c<cols; c++){
 		for (let r=0; r<rows; r++){
-
+			tint(255,alpha)
 			image(grass_sprite, c*cell_size, r*cell_size)
 
 			if (board[c][r].passable == false){
+				let sprite_id = Math.floor( board[c][r].rand_val * tree_sprites.length )
 				if (board[c][r].weak){
-					image(tree_sprite, c*cell_size, r*cell_size)
+					image(tree_sprites[sprite_id], c*cell_size, r*cell_size)
 				}else{
-					image(rock_sprite, c*cell_size, r*cell_size)
+					image(rock_sprites[sprite_id], c*cell_size, r*cell_size)
 				}
 			}
 
@@ -99,12 +141,16 @@ function draw_board(){
 					alpha = 255
 				}
 
+				tint(255,alpha)
+				let lava_frame = Math.floor( (millis()/(1000/lava_fps))%lava_sprites.length )
+				image(lava_sprites[lava_frame], c*cell_size, r*cell_size)
+
 				//console.log("lava prc"+lava_prc)
 
-				fill(255,0,0, alpha)
-				noStroke()
-				let lava_test_size = cell_size*0.8
-				rect(c*cell_size-lava_test_size/2, r*cell_size-lava_test_size/2, lava_test_size, lava_test_size)
+				// fill(255,0,0, alpha)
+				// noStroke()
+				// let lava_test_size = cell_size*0.8
+				// rect(c*cell_size-lava_test_size/2, r*cell_size-lava_test_size/2, lava_test_size, lava_test_size)
 
 			}
 			// fill(255,0,0)
@@ -112,6 +158,7 @@ function draw_board(){
 		}
 
 		//top row of grass
+		tint(255,alpha)
 		image(grass_sprite, c*cell_size, -1*cell_size)
 	}
 	
@@ -168,16 +215,41 @@ function draw_timing_ui(){
 	translate(width/2-timer_sprites[0].width/2, 0)
 	image(timer_sprites[cur_phase+1], 0, 0)
 
+
+  	//if we have input, show it
+  	if (input_info != null){
+  		let pic = null
+  		if (input_info.action == INPUT_MOVE){
+  			pic = symbol_move[input_info.dir]
+  		}
+  		if (input_info.action == INPUT_SLASH){
+  			pic = symbol_slash[input_info.dir]
+  		}
+  		if (input_info.action == INPUT_DASH){
+  			pic = symbol_dash[input_info.dir]
+  		}
+  		if (input_info.action == INPUT_PARRY){
+  			pic = symbol_parry
+  		}
+  		if (pic != null){
+  			image(pic, 343-pic.width/2, 50-pic.height/2)
+  		}
+  	}
+
 	pop()
 
 
 	if (game_state == STATE_PLAYING){
+	  
+	  /*
 	  textSize(20)
-	  //stroke(253, 100, 78)
 	  stroke(128,151,70)
 	  strokeWeight(2)
 	  fill(0)
 	  text("Turn "+turn_num, width/2, 110);
+	  */
+
+	  
 	}
 }
 
