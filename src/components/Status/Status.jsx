@@ -16,9 +16,20 @@ const Status = props => {
   };
   const champName = currentChamp => {
     if (currentChamp.uuid === myUuid) {
-      return "You are";
+      return (
+        <span>
+          <strong className={currentChamp.sprite_pack}>You</strong> are
+        </span>
+      );
     } else {
-      return `${currentChamp.disp_name} `;
+      return (
+        <span>
+          <strong className={currentChamp.sprite_pack}>
+            {currentChamp.disp_name}
+          </strong>{" "}
+          is
+        </span>
+      );
     }
   };
   return (
