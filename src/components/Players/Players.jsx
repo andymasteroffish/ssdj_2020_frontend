@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 import "./Players.scss";
 
@@ -32,6 +33,31 @@ const Players = props => {
     }
   };
 
+  const playerNameClass = data => {
+    let className = `${data.sprite_pack}`;
+    if (data.is_dead) {
+      className += " dead";
+    }
+    if (data.win_streak > 0) {
+      className += " winner";
+    }
+    return className;
+  };
+
+  const icons = data => {
+    const thisPlayer = data.uuid === myUuid;
+    const winner = data.win_streak > 0;
+    return (
+      <span>
+        {thisPlayer && <FontAwesomeIcon icon={faStar} />}
+        {thisPlayer && winner && " "}
+        {winner && <FontAwesomeIcon icon={faCrown} />}
+        {winner && " "}
+        {winner && data.win_streak}
+      </span>
+    );
+  };
+
   return (
     <div className="Players panel">
       {!name && (
@@ -54,9 +80,9 @@ const Players = props => {
         {players[0] &&
           players.map((data, idx) => {
             return (
-              <li key={idx} className={data.sprite_pack}>
+              <li key={idx} className={playerNameClass(data)}>
                 {data.disp_name}
-                {data.uuid === myUuid ? <FontAwesomeIcon icon={faStar} /> : ""}
+                {icons(data)}
               </li>
             );
           })}

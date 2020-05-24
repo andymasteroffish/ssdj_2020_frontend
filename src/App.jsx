@@ -28,8 +28,10 @@ const App = () => {
   const serverMsg = gameData.waiting_message;
 
   const addPlayer = name => {
-    const id = uuid();
-    setMyUuid(id);
+    const id = myUuid || uuid();
+    if (!myUuid) {
+      setMyUuid(id);
+    }
     console.log(`ADD PLAYER: ${name}`);
     const val = {
       type: "join_request",
