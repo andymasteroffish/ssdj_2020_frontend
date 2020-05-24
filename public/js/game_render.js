@@ -17,6 +17,14 @@ var grass_sprite = null
 var rock_sprite = null
 var tress_sprite = null
 
+//input icons
+var symbol_move = []
+var symbol_slash = []
+var symbol_dash = []
+var symbol_parry = null
+
+//lava
+
 var lava_warning_turns = 4
 
 function load_ui_sprites(){
@@ -26,9 +34,32 @@ function load_ui_sprites(){
 	for (let i=0; i<5; i++){
 		timer_sprites.push(loadImage("img/Layout/status_"+i.toString()+".png"))
 	}
-	rock_sprite = loadImage("img/Environment/rock.png")
-	tree_sprite = loadImage("img/Environment/tree.png")
+	rock_sprite = loadImage("img/Environment/rock_0.png")
+	tree_sprite = loadImage("img/Environment/tree_0.png")
 	grass_sprite = loadImage("img/Environment/grass.png")
+
+	symbol_parry = loadImage("img/Symbols/parry.png")
+
+	for (let i=0; i<4; i++){
+		symbol_move.push(null)
+		symbol_slash.push(null)
+		symbol_dash.push(null)
+	}
+	symbol_move[DIR_UP] = loadImage("img/Symbols/up.png")
+	symbol_move[DIR_RIGHT] = loadImage("img/Symbols/right.png")
+	symbol_move[DIR_DOWN] = loadImage("img/Symbols/down.png")
+	symbol_move[DIR_LEFT] = loadImage("img/Symbols/left.png")
+
+	symbol_slash[DIR_UP] = loadImage("img/Symbols/slash_up.png")
+	symbol_slash[DIR_RIGHT] = loadImage("img/Symbols/slash_right.png")
+	symbol_slash[DIR_DOWN] = loadImage("img/Symbols/slash_down.png")
+	symbol_slash[DIR_LEFT] = loadImage("img/Symbols/slash_left.png")
+
+	symbol_dash[DIR_UP] = loadImage("img/Symbols/dash_up.png")
+	symbol_dash[DIR_RIGHT] = loadImage("img/Symbols/dash_right.png")
+	symbol_dash[DIR_DOWN] = loadImage("img/Symbols/dash_down.png")
+	symbol_dash[DIR_LEFT] = loadImage("img/Symbols/dash_left.png")
+	
 }
 
 //renders the game to the canvas
@@ -168,16 +199,41 @@ function draw_timing_ui(){
 	translate(width/2-timer_sprites[0].width/2, 0)
 	image(timer_sprites[cur_phase+1], 0, 0)
 
+
+  	//if we have input, show it
+  	if (input_info != null){
+  		let pic = null
+  		if (input_info.action == INPUT_MOVE){
+  			pic = symbol_move[input_info.dir]
+  		}
+  		if (input_info.action == INPUT_SLASH){
+  			pic = symbol_slash[input_info.dir]
+  		}
+  		if (input_info.action == INPUT_DASH){
+  			pic = symbol_dash[input_info.dir]
+  		}
+  		if (input_info.action == INPUT_PARRY){
+  			pic = symbol_parry
+  		}
+  		if (pic != null){
+  			image(pic, 343-pic.width/2, 50-pic.height/2)
+  		}
+  	}
+
 	pop()
 
 
 	if (game_state == STATE_PLAYING){
+	  
+	  /*
 	  textSize(20)
-	  //stroke(253, 100, 78)
 	  stroke(128,151,70)
 	  strokeWeight(2)
 	  fill(0)
 	  text("Turn "+turn_num, width/2, 110);
+	  */
+
+	  
 	}
 }
 
