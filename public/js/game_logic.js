@@ -125,19 +125,6 @@ function game_keypress(keyCode){
 
 				send_user_input(input_info)
 			}
-
-
-			//arrow keys
-			// if (keyCode == 37) 	input_dir = DIR_LEFT
-			// if (keyCode == 38)	input_dir = DIR_UP
-			// if (keyCode == 39)	input_dir = DIR_RIGHT
-			// if (keyCode == 40)	input_dir = DIR_DOWN
-
-			// let val = {
-	  //   		type:"client_move",
-	  //   		key:keyCode
-	  //   	}
-	  //   	socket.send(JSON.stringify(val));
 	    }
 	}
 }
@@ -183,7 +170,7 @@ function refresh_board(){
 		return
 	}
 
-	console.log("refresh now pls")
+	//console.log("refresh now pls")
 
 	game_state = queued_board.game_state
 	board = queued_board.board

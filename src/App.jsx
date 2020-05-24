@@ -29,8 +29,6 @@ const App = () => {
   const gameLoaded =
     !!window["register_client_update_callback"] && !!window["socket"];
 
-  console.log(`GAME LOADED? ${gameLoaded}`);
-
   useEffect(() => {
     if (gameLoaded) {
       console.log("REGISTERING GAME DATA PIPE");

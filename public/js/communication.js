@@ -8,7 +8,7 @@ var socket;
 
 var remote_adress = "ws://ssdj-game.herokuapp.com:80";
 //uncomment this line to test locally
-remote_adress = "ws://localhost:3001";
+//remote_adress = "ws://localhost:3001";
 
 socket = new WebSocket(remote_adress);
 //things to happen once socket is connected
@@ -33,11 +33,11 @@ function process_msg(data) {
     return;
   }
 
-  console.log("I got a: " + msg.type);
+  //console.log("I got a: " + msg.type);
 
   //if it has game info, we can update
   if (msg.info != null) {
-    console.log("update board")
+    //console.log("update board")
     get_board(msg.info);
   }
 
@@ -93,6 +93,7 @@ function process_msg(data) {
     //window.client_update_callback(msg.info.players);
   }
 
+  //this might cause some issues, but probably ok???
   if (msg.info && msg.info.players) {
     send_callback_info(msg.info.players, game_state);
   }

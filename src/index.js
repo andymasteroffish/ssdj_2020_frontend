@@ -30,6 +30,7 @@ const loadScript = opts => {
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
+/*
 const jQueryLoader = new Promise(function(resolve, reject) {
   console.log("LOADING JQUERY");
   loadScript({
@@ -40,9 +41,10 @@ const jQueryLoader = new Promise(function(resolve, reject) {
     reject: reject
   });
 });
+*/
 
 const p5loader = async () => {
-  await jQueryLoader;
+  //await jQueryLoader;
   console.log("LOADING p5");
 
   return new Promise(function(resolve, reject) {
