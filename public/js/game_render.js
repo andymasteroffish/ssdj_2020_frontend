@@ -124,6 +124,15 @@ function draw_board(){
 
 //UI elements at the top of the canvas
 function draw_timing_ui(){
+	
+	push()
+
+	translate(width/2-timer_sprites[0].width/2, 20)
+	image(timer_sprites[cur_phase+1], 0, 0)
+
+	pop()
+
+	/*
 	let spacing = 50
 	let total_width = spacing*4
 	let time_prc = turn_timer/turn_time
@@ -180,6 +189,7 @@ function draw_timing_ui(){
 	
 
 	pop()
+	*/
 
 	if (game_state == STATE_PLAYING){
 		fill(0)
