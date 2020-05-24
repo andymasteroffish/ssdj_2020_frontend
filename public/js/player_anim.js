@@ -76,15 +76,23 @@ function make_animator(player){
 		anim.state = ANIM_IDLE
 	}
 
-	//the dead are always dead
-	if (player.is_dead){
+	//if the player was dead last frame, keep them on the final death frame
+	if (player.prev_state.is_dead){
 		anim.state = ANIM_DEATH
-		//if they were dead last turn, just sip to the end
-		if (player.prev_state.is_dead){
-			anim.frame = 9999
-			anim.timer = 9999
-		}
+		anim.frame = 9999
+		anim.timer = 9999
 	}
+
+	//console.log(player.disp_name+" start on "+anim.state)
+	// //the dead are always dead
+	// if (player.is_dead){
+	// 	anim.state = ANIM_DEATH
+	// 	//if they were dead last turn, just sip to the end
+	// 	if (player.prev_state.is_dead){
+	// 		anim.frame = 9999
+	// 		anim.timer = 9999
+	// 	}
+	// }
 
 	return anim
 }
@@ -107,8 +115,14 @@ function update_player_anim(anim){
 		anim.frame++
 		//when the animation is done we should figure out what we do next
 		if (anim.frame >= sprite_frames.length){
+			//if they just died, move to death animation
+			if (anim.owner.is_dead && !anim.owner.prev_state.is_dead){
+				anim.frame = 0
+				anim.state = ANIM_DEATH
+				anim.owner.prev_state.is_dead = true
+			}
 			//idle and stun just loop
-			if (anim.state == ANIM_IDLE || anim.state == ANIM_STUNNED){
+			else if (anim.state == ANIM_IDLE || anim.state == ANIM_STUNNED){
 				anim.frame = 0
 			}
 			//death stays on last frame
@@ -124,6 +138,7 @@ function update_player_anim(anim){
 					anim.state = ANIM_IDLE
 				}
 			}
+			//console.log(anim.owner.disp_name+" goes to "+anim.state)
 		}
 	}
 
@@ -164,7 +179,7 @@ function draw_player_anim(anim, x, y){
 	translate(x,y)
 
 	let rotation = PI/2 * anim.owner.last_valid_input_dir
-	
+
 	rotate(rotation)
 
 	image(anim.sprite, -anim.sprite.width/2, -anim.sprite.height/2);
