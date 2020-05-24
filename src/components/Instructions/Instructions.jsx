@@ -7,8 +7,7 @@ const Instructions = () => {
       <h4>GAME RULES</h4>
       <p>Last player standing win!</p>
       <p>
-        Each turn, each player may input one of the following moves when the
-        light flashes YELLOW.
+        Each turn, when the light flashes YELLOW, each player may input one of the following moves:
       </p>
       <h5>CONTROLS</h5>
       <p>
@@ -22,7 +21,7 @@ const Instructions = () => {
         adjacent space. Dasher is stunned next turn.
       </p>
       <p>
-        <strong>PARRY</strong>: Spacebar
+        <strong>PARRY</strong>: S
         <br /> Deflects all attacks this turn. Parrier is stunned next turn if
         not attacked.
       </p>
