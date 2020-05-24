@@ -14,8 +14,8 @@ var mute_icon_pos = {x:5,y:5}
 //environment sprites
 var timer_sprites = []
 var grass_sprite = null
-var rock_sprite = null
-var tress_sprite = null
+var rock_sprites = []
+var tree_sprites = []
 
 //input icons
 var symbol_move = []
@@ -35,8 +35,12 @@ function load_ui_sprites(){
 	for (let i=0; i<5; i++){
 		timer_sprites.push(loadImage("img/Layout/status_"+i.toString()+".png"))
 	}
-	rock_sprite = loadImage("img/Environment/rock_0.png")
-	tree_sprite = loadImage("img/Environment/tree_0.png")
+	
+	for (let i=0; i<3; i++){
+		rock_sprites.push(loadImage("img/Environment/rock_"+i.toString()+".png"))
+		tree_sprites.push(loadImage("img/Environment/tree_"+i.toString()+".png"))
+	}
+	
 	grass_sprite = loadImage("img/Environment/grass.png")
 
 	for (let i=0; i<9; i++){
@@ -105,10 +109,11 @@ function draw_board(){
 			image(grass_sprite, c*cell_size, r*cell_size)
 
 			if (board[c][r].passable == false){
+				let sprite_id = Math.floor( board[c][r].rand_val * tree_sprites.length )
 				if (board[c][r].weak){
-					image(tree_sprite, c*cell_size, r*cell_size)
+					image(tree_sprites[sprite_id], c*cell_size, r*cell_size)
 				}else{
-					image(rock_sprite, c*cell_size, r*cell_size)
+					image(rock_sprites[sprite_id], c*cell_size, r*cell_size)
 				}
 			}
 
