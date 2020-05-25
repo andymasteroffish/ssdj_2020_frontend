@@ -95,8 +95,8 @@ const Players = props => {
       )}
 
       {gameData.game_state === 0 && name && !playerOnServer && (
-        <div>
-          <button onClick={handleRejoin}>Click to rejoin</button>
+        <div className="join-button">
+          <button onClick={handleRejoin}>JOIN</button>
         </div>
       )}
       <h5>PLAYERS</h5>

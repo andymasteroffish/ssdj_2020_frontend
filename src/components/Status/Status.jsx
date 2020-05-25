@@ -4,8 +4,20 @@ import "./Status.scss";
 const Status = props => {
   const { gameData, myUuid, playerOnServer, serverMsg, currentChamp } = props;
   const statusMsg = (game_state, name, playerOnServer, serverMsg) => {
-    if (!myUuid) {
-      return <p>Enter your name below to join.</p>;
+    if (!myUuid && gameData.game_state !== 0) {
+      return (
+        <span>
+          <p>Game in progress.</p>
+          <p>Enter your name below to join the next game.</p>
+        </span>
+      );
+    } else if (!myUuid) {
+      return (
+        <span>
+          {serverMsg && <p>{serverMsg}</p>}
+          <p>Enter your name below to join.</p>
+        </span>
+      );
     } else if (gameData.game_state !== 0 && name && !playerOnServer) {
       return <p>Waiting to join when new game starts....</p>;
     } else if (gameData.game_state === 0) {

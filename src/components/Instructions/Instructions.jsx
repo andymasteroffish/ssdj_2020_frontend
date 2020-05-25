@@ -28,6 +28,7 @@ const Instructions = () => {
         <br /> Deflects all attacks this turn. Parrier is stunned next turn if
         not attacked.
       </p>
+      <p className="sound-on">Plays best with sound ON!</p>
     </div>
   );
 };

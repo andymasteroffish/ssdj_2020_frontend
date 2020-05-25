@@ -1,4 +1,5 @@
 @import "../../css/sizes";
+@import "../../css/colors";
 
 .Instructions {
   height: 540px;
@@ -8,5 +9,10 @@
     font-size: 11px;
     padding-bottom: 10px;
     padding-top: 10px;
+  }
+  .sound-on {
+    color: $bright-yellow;
+    font-style: italic;
+    font-weight: bold;
   }
 }
