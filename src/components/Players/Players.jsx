@@ -18,7 +18,7 @@ const Players = props => {
   const [tempName, setTempName] = useState("");
 
   const updateName = event => {
-    const cappedName = event.target.value.slice(0, 10);
+    const cappedName = event.target.value.slice(0, 8);
     setTempName(cappedName);
   };
 
@@ -89,6 +89,11 @@ const Players = props => {
         <div className="name-display">
           <p>Your name is: </p>
           <p>
+            <svg viewBox="0 0 56 18">
+              <text x="0" y="15">
+                {name}
+              </text>
+            </svg>
             <strong className={me.sprite_pack}>{name}</strong>
           </p>
         </div>

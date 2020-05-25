@@ -8,8 +8,9 @@ const Instructions = () => {
       <p>Last player standing win!</p>
       <p>
         <strong>
-          Each turn, when the light flashes YELLOW, each player may input one of
-          the following moves:
+          Each turn, when the light flashes{" "}
+          <span className="text-highlight">YELLOW</span>, each player may input
+          one of the following moves:
         </strong>
       </p>
       <h5>CONTROLS</h5>
@@ -28,7 +29,7 @@ const Instructions = () => {
         <br /> Deflects all attacks this turn. Parrier is stunned next turn if
         not attacked.
       </p>
-      <p className="sound-on">Plays best with sound ON!</p>
+      <p className="text-highlight">Plays best with sound ON!</p>
     </div>
   );
 };
