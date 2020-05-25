@@ -24,9 +24,11 @@ const App = () => {
   const players = gameData.players;
   const currentChamp = gameData.winner_last_round;
 
-  const playerOnServer = players.some(player => {
+  const me = players.find(player => {
     return player.uuid === myUuid;
   });
+
+  const playerOnServer = !!me;
 
   const serverMsg = gameData.waiting_message;
 
@@ -96,6 +98,7 @@ const App = () => {
             addPlayer={addPlayer}
             playerOnServer={playerOnServer}
             myUuid={myUuid}
+            me={me}
           />
         </div>
         <div className="game-placeholder"></div>

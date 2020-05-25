@@ -6,7 +6,15 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import "./Players.scss";
 
 const Players = props => {
-  const { name, setName, gameData, addPlayer, playerOnServer, myUuid } = props;
+  const {
+    name,
+    setName,
+    gameData,
+    addPlayer,
+    playerOnServer,
+    myUuid,
+    me
+  } = props;
   const [tempName, setTempName] = useState("");
 
   const updateName = event => {
@@ -62,17 +70,28 @@ const Players = props => {
   return (
     <div className="Players panel">
       {!name && (
-        <div>
+        <div className="name-display">
           <h4>ENTER NAME</h4>
           <form onSubmit={savePlayerName}>
             <input type="text" value={tempName} onChange={updateName} />
           </form>
         </div>
       )}
-      {name && (
-        <p>
-          Your name is: <strong>{name}</strong>
-        </p>
+      {name && !me && (
+        <div className="name-display">
+          <p>Your name is: </p>
+          <p>
+            <strong>{name}</strong>
+          </p>
+        </div>
+      )}
+      {me && (
+        <div className="name-display">
+          <p>Your name is: </p>
+          <p>
+            <strong className={me.sprite_pack}>{name}</strong>
+          </p>
+        </div>
       )}
 
       {gameData.game_state === 0 && name && !playerOnServer && (
