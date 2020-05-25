@@ -89,11 +89,6 @@ const Players = props => {
         <div className="name-display">
           <p>Your name is: </p>
           <p>
-            <svg viewBox="0 0 56 18">
-              <text x="0" y="15">
-                {name}
-              </text>
-            </svg>
             <strong className={me.sprite_pack}>{name}</strong>
           </p>
         </div>
