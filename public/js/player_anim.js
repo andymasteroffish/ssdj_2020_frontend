@@ -208,9 +208,9 @@ function draw_name_tag(anim){
 	translate(anim.draw_pos.x, anim.draw_pos.y)
 	//little name tag
 	textAlign(CENTER);
-	fill(10,140)
+	fill(10,180)
 	noStroke()
-	textSize(15)
-	text(anim.owner.disp_name, 0, -23)
+	textSize(16)
+	text(anim.owner.disp_name, 0, -22)
 	pop()
 }

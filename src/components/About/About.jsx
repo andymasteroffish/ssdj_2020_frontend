@@ -57,7 +57,7 @@ const About = () => {
           </a>
         </p>
         <p>
-          volume by{" "}
+          Volume icon by{" "}
           <a
             href="https://thenounproject.com/rudezstudio/"
             target="_blank"
@@ -65,7 +65,7 @@ const About = () => {
           >
             Rudez Studio
           </a>{" "}
-          from the Noun Project sounds by{" "}
+          from the Noun Project. Sounds by{" "}
           <a
             href="https://twitter.com/zassimo"
             target="_blank"
