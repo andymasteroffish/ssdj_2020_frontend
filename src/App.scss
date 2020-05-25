@@ -31,13 +31,19 @@
     height: $game-panel-size;
   }
 
+  .left.column {
+    display: flex;
+    flex-direction: column;
+  }
+
   .boxtext {
     background-color: $text-display-background;
     color: $black;
 
     p,
     li {
-      padding: 0 $spacing-xsmall;
+      padding-left: $spacing-xsmall;
+      padding-right: $spacing-xsmall;
     }
     p:first-child,
     li:first-child {

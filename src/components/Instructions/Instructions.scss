@@ -1,9 +1,12 @@
 @import "../../css/sizes";
 
 .Instructions {
-  text-align: left;
   height: 540px;
+  text-align: left;
+
   p {
     font-size: 11px;
+    padding-bottom: 10px;
+    padding-top: 10px;
   }
 }

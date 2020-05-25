@@ -4,7 +4,7 @@
 .Players {
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
 
   li {
     font-size: 14px;
@@ -38,8 +38,8 @@
 
   .player-list {
     height: auto;
-    min-height: 265px;
     overflow-y: auto;
+    flex-grow: 4;
   }
 
   .dead {
